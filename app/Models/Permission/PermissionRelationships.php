@@ -2,11 +2,13 @@
 
 namespace App\Models\Permission;
 
+use App\Models\Role\Role;
+
 trait PermissionRelationships
 {
     public function roles()
     {
-        return $this->belongsToMany('App\Role' , 'permission_role');
+        return $this->belongsToMany(Role::class , 'permission_role');
     }
 
     public function hasRole($roleId)

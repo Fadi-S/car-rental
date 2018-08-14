@@ -3,12 +3,13 @@
 namespace App\Models\Role;
 
 use App\Models\Permission\Permission;
+use Illuminate\Support\Facades\Config;
 
 trait RoleMethods
 {
     public static function createDefault()
     {
-        $admin = static::create(['name'=>'Admin']);
+        $admin = static::create(['name'=>Config::get("app.default_role")]);
         $permissions = Permission::permissionsArray();
         foreach($permissions as $perm)
         {

@@ -1,0 +1,1 @@
+{!! Form::open(["method" => "POST", "url" => url('/admin/login')]) !!}

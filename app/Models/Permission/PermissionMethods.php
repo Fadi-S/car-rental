@@ -66,27 +66,6 @@ trait PermissionMethods
                 'label'  => 'View Admins Activity',
             ],
 
-            /* Meetings */
-            [
-                'group'  => 'Meetings',
-                'name'   => 'add_meeting',
-                'label'  => 'Add Meeting',
-            ],
-            [
-                'group'  => 'Meetings',
-                'name'   => 'edit_meeting',
-                'label'  => 'Edit Meeting',
-            ],
-            [
-                'group'  => 'Meetings',
-                'name'   => 'delete_meeting',
-                'label'  => 'Delete Meeting',
-            ],
-            [
-                'group'  => 'Meetings',
-                'name'   => 'view_meeting',
-                'label'  => 'View Meeting',
-            ],
 
             /* Users */
             [
@@ -109,32 +88,32 @@ trait PermissionMethods
                 'name'   => 'view_user',
                 'label'  => 'View Users',
             ],
-            [
-                'group'  => 'Users',
-                'name'   => 'view_user_attendance',
-                'label'  => "View User's Attendance",
-            ],
 
-            /* Versions */
+            /* Cars */
             [
-                'group'  => 'Versions',
-                'name'   => 'add_version',
-                'label'  => 'Add Version',
+                'group'  => 'Cars',
+                'name'   => 'add_car',
+                'label'  => 'Add Car',
             ],
             [
-                'group'  => 'Versions',
-                'name'   => 'edit_version',
-                'label'  => 'Edit Version',
+                'group'  => 'Cars',
+                'name'   => 'edit_car',
+                'label'  => 'Edit Car',
             ],
             [
-                'group'  => 'Versions',
-                'name'   => 'delete_version',
-                'label'  => 'Delete Version',
+                'group'  => 'Cars',
+                'name'   => 'delete_car',
+                'label'  => 'Delete Car',
             ],
             [
-                'group'  => 'Versions',
-                'name'   => 'view_version',
-                'label'  => 'View Versions',
+                'group'  => 'Cars',
+                'name'   => 'view_car',
+                'label'  => 'View Car',
+            ],
+            [
+                'group'  => 'Cars',
+                'name'   => 'activity_car',
+                'label'  => 'View Cars Activity',
             ],
 
         ];
