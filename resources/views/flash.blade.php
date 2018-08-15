@@ -29,5 +29,11 @@
             </div>
         @endif
     @endforeach
+    <script>
+        $('div.alert').not(".alert-important, .alert-normal").each(function(i){
+            $(this).delay(5000 * (i+1)).hide(500);
+        });
+        $('#flash-overlay-modal').modal();
+    </script>
 </div>
 {{ session()->forget('flash_notification') }}

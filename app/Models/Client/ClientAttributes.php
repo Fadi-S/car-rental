@@ -17,4 +17,12 @@ trait ClientAttributes
         $this->notify(new ClientResetPasswordNotification($token));
     }
 
+    public function getPictureAttribute($path)
+    {
+        if(is_null($path) || $path == '' || !\Storage::exists($path)) {
+            return url("images/defaultPicture.png");
+        }
+        return url(\Storage::url($path));
+    }
+
 }

@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 
 class Admin extends Authenticatable
 {
-    use Notifiable, SoftDeletes, AdminAttributes, AdminRelationships;
+    use Notifiable, SoftDeletes, AdminAttributes, AdminRelationships, AdminMethods;
 
     protected $hidden = ["password", "remember_token"];
     protected $guarded = [];

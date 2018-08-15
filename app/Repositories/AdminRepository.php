@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Repositories\Admin;
+namespace App\Repositories;
 
 use App\Http\Requests\Admin\AdminRequest;
 use App\Models\Admin\Admin;
 use App\Models\AdminLog\AdminLog;
+use Illuminate\Http\Request;
 
 class AdminRepository
 {
@@ -50,5 +51,25 @@ class AdminRepository
             flash()->error("Error Deleting Admin");
             return false;
         }
+    }
+
+    public function changePassword(Request $request, Admin $admin)
+    {
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed|min:6'
+        ]);
+
+        if(\Hash::check($request->old_password, $admin->password)) {
+            $admin->password = $request->new_password;
+            $admin->save();
+
+            flash()->success("Password Changed Successfully");
+            return true;
+        }else{
+            flash()->error("Old Password doesn't match!")->important();
+            return false;
+        }
+
     }
 }

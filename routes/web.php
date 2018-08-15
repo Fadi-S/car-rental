@@ -25,7 +25,12 @@ Route::prefix(Config::get("app.admin_url"))->group(function() {
         "admins" => 'Admin\AdminsController',
 
         "clients" => 'Admin\ClientsController',
+
+        "roles" => 'Admin\RolesController',
     ]);
+
+    Route::get("change-password", 'Admin\AdminsController@showChangePasswordForm');
+    Route::post("change-password", 'Admin\AdminsController@changePassword');
 
 });
 
@@ -47,5 +52,5 @@ Route::get('password/reset/{token}', 'User\Auth\ResetPasswordController@showRese
 Route::post('password/reset', 'User\Auth\ResetPasswordController@reset');
 
 
-Route::get("/", 'DashboardController@index');
+Route::get("/", 'User\DashboardController@index');
 

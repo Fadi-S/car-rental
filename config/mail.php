@@ -44,6 +44,14 @@ return [
 
     'port' => env('MAIL_PORT', 587),
 
+
+    'stream' => [
+        'ssl' => [
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+        ],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Global "From" Address

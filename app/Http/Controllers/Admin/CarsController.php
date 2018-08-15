@@ -43,12 +43,12 @@ class CarsController extends Controller
 
     public function show(Car $car)
     {
-        return view("admins.car.show", compact("car"));
+        return view("admin.car.show", compact("car"));
     }
 
     public function edit(Car $car)
     {
-        return view("admins.cars.edit", compact("car"));
+        return view("admin.cars.edit", compact("car"));
     }
 
     public function update(CarRequest $request, Car $car)

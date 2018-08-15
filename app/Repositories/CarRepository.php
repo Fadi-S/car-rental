@@ -31,20 +31,18 @@ class CarRepository
 
     private function getValues(CarRequest $request)
     {
-        $keys = $request->keys() - Car::$excluded;
-        $finalKeys = [];
-        foreach($keys as $key) {
-            if(!str_contains($key, "__checkbox"))
-                $finalKeys[] = $key;
-        }
-
+        $finalKeys = array_diff(\Schema::getColumnListing("cars"), Car::$excluded, ["id"]);
         $values = [];
         foreach($finalKeys as $key) {
             if($request->get($key . "__checkbox") == "1") {
 
                 if($request->get($key) != "")
                     $values[$key] = $request->get($key);
+                else
+                    $values[$key] = "Yes";
 
+            }else{
+                $values[$key] = null;
             }
         }
         return array_merge($request->only(Car::$excluded), $values);
@@ -52,13 +50,10 @@ class CarRepository
 
     public function update(CarRequest $request, Car $car)
     {
-        if (!AdminLog::createRecord("edit", $car, $request->keys(), $request->all())) {
-            flash()->error("You didn't change anything!");
-            return false;
-        }
+        $values = $this->getValues($request);
+        AdminLog::createRecord("edit", $car, $request->keys(), $values);
 
-
-        if ($car->update($this->getValues($request)))
+        if ($car->update($values))
             flash()->success("Car Updated Successfully");
         else
             flash()->error("Error Updating Car!")->important();

@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\AdminRequest;
 use App\Models\Admin\Admin;
-use App\Repositories\Admin\AdminRepository;
+use App\Repositories\AdminRepository;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class AdminsController extends Controller
 {
@@ -59,5 +60,16 @@ class AdminsController extends Controller
     {
         $this->adminRepo->delete($admin);
         return redirect("$this->adminUrl/admins");
+    }
+
+    public function showChangePasswordForm()
+    {
+        return view("admin.admins.changePassword");
+    }
+
+    public function changePassword(Request $request)
+    {
+        $this->adminRepo->changePassword($request, auth()->guard("admin")->user());
+        return redirect("$this->adminUrl/change-password");
     }
 }

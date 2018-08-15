@@ -105,7 +105,6 @@ class CreateCarsTable extends Migration
             $table->text("electric_windows")->nullable();
             $table->text("panoramic_roof")->nullable();
             $table->text("tires")->nullable();
-            $table->text("price")->nullable();
             $table->text("blind_point_assistance")->nullable();
             $table->text("rear_power_outlet")->nullable();
             $table->text("trunk_power_outlet")->nullable();
@@ -116,6 +115,7 @@ class CreateCarsTable extends Migration
             $table->integer("edition_id");
             $table->integer("octane_id");
             $table->integer("location_id");
+            $table->integer("price");
 
             $table->timestamp("archived_at")->nullable();
             $table->softDeletes();

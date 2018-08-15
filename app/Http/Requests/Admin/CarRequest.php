@@ -26,6 +26,7 @@ class CarRequest extends FormRequest
             "type_id" => "required|numeric|notIn:0",
             "octane_id" => "required|numeric|notIn:0",
             "location_id" => "required|numeric|notIn:0",
+            "price" => "required|numeric",
         ];
     }
 
