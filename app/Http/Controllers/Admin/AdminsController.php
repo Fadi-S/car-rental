@@ -1,0 +1,63 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Requests\Admin\AdminRequest;
+use App\Models\Admin\Admin;
+use App\Repositories\Admin\AdminRepository;
+use App\Http\Controllers\Controller;
+
+class AdminsController extends Controller
+{
+    private $adminRepo;
+    private $adminUrl;
+
+    public function __construct(AdminRepository $adminRepo)
+    {
+        $this->adminRepo = $adminRepo;
+        $this->adminUrl = \Config::get("app.admin_url");
+        $this->middleware("auth:admin");
+        $this->middleware("permission:add_admin", ['only' => "create"]);
+        $this->middleware("permission:edit_admin", ['only' => "edit"]);
+        $this->middleware("permission:view_admin", ['only' => ["show", "index"] ]);
+    }
+
+    public function index()
+    {
+        $admins = $this->adminRepo->getAll();
+        return view('admin.admins.index', compact('admins'));
+    }
+
+    public function show(Admin $admin)
+    {
+        return view('admin.admins.show', compact('admin'));
+    }
+
+    public function edit(Admin $admin)
+    {
+        return view('admin.admins.edit', compact('admin'));
+    }
+
+    public function create()
+    {
+        return view('admin.admins.create');
+    }
+
+    public function store(AdminRequest $request)
+    {
+        $this->adminRepo->create($request);
+        return redirect("$this->adminUrl/admins/create");
+    }
+
+    public function update(AdminRequest $request, Admin $admin)
+    {
+        $this->adminRepo->update($request, $admin);
+        return redirect("$this->adminUrl/admins/$admin->username/edit");
+    }
+
+    public function destroy(Admin $admin)
+    {
+        $this->adminRepo->delete($admin);
+        return redirect("$this->adminUrl/admins");
+    }
+}

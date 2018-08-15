@@ -10,10 +10,11 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    protected $redirectTo = '/';
+    protected $redirectTo;
 
     public function __construct()
     {
+        $this->redirectTo = "/" . \Config::get("app.admin_url");
         $this->middleware('guest:admin')->except('logout');
     }
 

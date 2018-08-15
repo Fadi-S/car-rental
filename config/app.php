@@ -136,6 +136,11 @@ return [
     "default_role" => "Admin",
 
 
+    /*
+     * Admin Directory Path
+     */
+
+    "admin_url" => "admin",
 
     /*
     |--------------------------------------------------------------------------
@@ -191,6 +196,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        \App\Providers\NavigationServiceProvider::class,
 
     ],
 

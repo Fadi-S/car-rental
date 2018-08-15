@@ -67,26 +67,26 @@ trait PermissionMethods
             ],
 
 
-            /* Users */
+            /* Clients */
             [
-                'group'  => 'Users',
-                'name'   => 'add_user',
-                'label'  => 'Add User',
+                'group'  => 'Clients',
+                'name'   => 'add_client',
+                'label'  => 'Add Client',
             ],
             [
-                'group'  => 'Users',
-                'name'   => 'edit_user',
-                'label'  => 'Edit User',
+                'group'  => 'Clients',
+                'name'   => 'edit_client',
+                'label'  => 'Edit Client',
             ],
             [
-                'group'  => 'Users',
-                'name'   => 'delete_user',
-                'label'  => 'Delete User',
+                'group'  => 'Clients',
+                'name'   => 'delete_client',
+                'label'  => 'Delete Client',
             ],
             [
-                'group'  => 'Users',
-                'name'   => 'view_user',
-                'label'  => 'View Users',
+                'group'  => 'Clients',
+                'name'   => 'view_client',
+                'label'  => 'View Clients',
             ],
 
             /* Cars */

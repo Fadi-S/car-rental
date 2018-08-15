@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CarOctane extends Model
 {
+    use CarOctaneRelationships;
+
     protected $guarded = [];
 }

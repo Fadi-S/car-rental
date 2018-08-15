@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class ClientArea extends Model
 {
-    //
+    use ClientAreaRelationships;
 }

@@ -5,11 +5,21 @@ namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class Admin extends Authenticatable
 {
-    use SoftDeletes;
+    use Notifiable, SoftDeletes, AdminAttributes, AdminRelationships;
 
     protected $hidden = ["password", "remember_token"];
     protected $guarded = [];
+    protected $dates = [
+        "deleted_at",
+        "archived_at"
+    ];
+
+    public function getRouteKeyName()
+    {
+        return "username";
+    }
 }

@@ -10,7 +10,7 @@ class AdminsTableSeeder extends Seeder
             "name" => \Illuminate\Support\Facades\Config::get("app.default_admin"),
             "username" => "administrator",
             "email" => "admin@email.com",
-            "password" => " 12345",
+            "password" => "12345",
             "phone" => "01111111111",
             "role_id" => \App\Models\Role\Role::first()->id,
             "location_id" => \App\Models\Location\Location::first()->id,

@@ -17,4 +17,9 @@ trait RoleRelationships
     {
         return $this->hasMany(Admin::class);
     }
+
+    public function adminLog()
+    {
+        return $this->morphMany(AdminLog::class, 'logable');
+    }
 }
