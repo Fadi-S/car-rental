@@ -18,7 +18,8 @@ Route::prefix(Config::get("app.admin_url"))->group(function() {
 
     Route::get("/", 'Admin\DashboardController@index');
 
-
+    Route::get("/admins/activity", 'Admin\AdminsController@showActivity');
+    Route::post('/admins/activity/{activity}/restore', 'Admin\AdminsController@restoreActivity');
     Route::resources([
         "cars" => 'Admin\CarsController',
 
@@ -28,6 +29,12 @@ Route::prefix(Config::get("app.admin_url"))->group(function() {
 
         "roles" => 'Admin\RolesController',
     ]);
+
+    Route::resource("locations", 'Admin\LocationsController')->except("show");
+    Route::resource("categories", 'Admin\CarCategoriesController')->except("show");
+    Route::resource("editions", 'Admin\CarEditionsController')->except("show");
+    Route::resource("types", 'Admin\CarTypesController')->except("show");
+    Route::resource("octanes", 'Admin\CarOctanesController')->except("show");
 
     Route::get("change-password", 'Admin\AdminsController@showChangePasswordForm');
     Route::post("change-password", 'Admin\AdminsController@changePassword');

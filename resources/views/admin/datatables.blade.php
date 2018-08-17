@@ -1,8 +1,8 @@
-{!! Html::style('assets/plugins/datatables/jquery.dataTables.min.css') !!}
+{!! Html::style('/plugins/datatables/jquery.dataTables.min.css') !!}
 
-{!! Html::script("assets/plugins/datatables/jquery.dataTables.min.js") !!}
+{!! Html::script("/plugins/datatables/jquery.dataTables.min.js") !!}
 
-{!! Html::script("assets/plugins/datatables/dataTables.bootstrap.js") !!}
+{!! Html::script("/plugins/datatables/dataTables.bootstrap.js") !!}
 
 <script>
     $(".data-table").DataTable();

@@ -42,11 +42,15 @@
                     </div>
 
                     <ul class="nav navbar-nav navbar-right pull-right">
+                        <li class="hidden-xs">
+                            <a href="{{ url("$adminUrl/admins/activity") }}" class="waves-effect waves-light"><i class="fa fa-history"></i></a>
+                        </li>
+
                         <li class="dropdown top-menu-item-xs">
                             <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true"><img src="{{ $currentAdmin->picture }}" alt="user-img" class="img-circle"> </a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ url("$adminUrl/admins/$currentAdmin->username") }}"><i class="ti-user m-r-10 text-custom"></i> Profile</a></li>
-                                <li><a href="{{ url("$adminUrl/change-password/") }}"><i class="ti-user m-r-10 text-custom"></i> Change password</a></li>
+                                <li><a href="{{ url("$adminUrl/change-password/") }}"><i class="ti-pencil m-r-10 text-custom"></i> Change password</a></li>
                                 <li class="divider"></li>
                                 <li>
                                     <a href="{{ url($adminUrl.'/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -73,6 +77,12 @@
         <div class="sidebar-inner slimscrollleft">
             <!--- Divider -->
             <div id="sidebar-menu">
+
+                <div class="row">
+                    <img class="img-circle" src="{{ $currentAdmin->picture }}" width="70" height="70">
+                    <span class="a">{{ $currentAdmin->name }}</span>
+                </div>
+
                 <ul>
 
                     <li class="text-muted menu-title">Navigation</li>
@@ -117,12 +127,61 @@
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-car"></i> <span> Cars </span> <span class="menu-arrow"></span> </a>
                             <ul class="list-unstyled">
+
                                 @if($currentAdmin->hasPermission("add_car"))
+                                    <li class="has_sub">
+                                        <a href="javascript:void(0);" class="waves-effect"><span>Categories</span>  <span class="menu-arrow"></span></a>
+                                        <ul style="">
+                                            <li><a href="{{ url("$adminUrl/categories/create") }}"><span>Create Category</span></a></li>
+                                            <li><a href="{{ url("$adminUrl/categories") }}"><span>All Categories</span></a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="has_sub">
+                                        <a href="javascript:void(0);" class="waves-effect"><span>Editions</span>  <span class="menu-arrow"></span></a>
+                                        <ul style="">
+                                            <li><a href="{{ url("$adminUrl/editions/create") }}"><span>Create Edition</span></a></li>
+                                            <li><a href="{{ url("$adminUrl/editions") }}"><span>All Editions</span></a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="has_sub">
+                                        <a href="javascript:void(0);" class="waves-effect"><span>Types</span>  <span class="menu-arrow"></span></a>
+                                        <ul style="">
+                                            <li><a href="{{ url("$adminUrl/types/create") }}"><span>Create Type</span></a></li>
+                                            <li><a href="{{ url("$adminUrl/types") }}"><span>All Types</span></a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="has_sub">
+                                        <a href="javascript:void(0);" class="waves-effect"><span>Octanes</span>  <span class="menu-arrow"></span></a>
+                                        <ul style="">
+                                            <li><a href="{{ url("$adminUrl/octanes/create") }}"><span>Create Octane</span></a></li>
+                                            <li><a href="{{ url("$adminUrl/octanes") }}"><span>All Octanes</span></a></li>
+                                        </ul>
+                                    </li>
+
                                     <li><a href="{{ url("$adminUrl/cars/create") }}">Create Car</a></li>
                                 @endif
 
                                 @if($currentAdmin->hasPermission("view_car"))
                                     <li><a href="{{ url("$adminUrl/cars") }}">All Cars</a></li>
+                                @endif
+
+                            </ul>
+                        </li>
+                    @endif
+
+                    @if($currentAdmin->hasPermissionGroup("Admins") || $currentAdmin->hasPermissionGroup("Cars") || $currentAdmin->hasPermissionGroup("Clients"))
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-map-marker"></i> <span> Locations </span> <span class="menu-arrow"></span> </a>
+                            <ul class="list-unstyled">
+                                @if($currentAdmin->hasPermission("add_admin") || $currentAdmin->hasPermission("add_car") || $currentAdmin->hasPermission("add_client"))
+                                    <li><a href="{{ url("$adminUrl/locations/create") }}">Create Locations</a></li>
+                                @endif
+
+                                @if($currentAdmin->hasPermission("view_admin") || $currentAdmin->hasPermission("view_car") || $currentAdmin->hasPermission("view_calint"))
+                                    <li><a href="{{ url("$adminUrl/locations") }}">All Locations</a></li>
                                 @endif
 
                             </ul>

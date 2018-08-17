@@ -20,6 +20,7 @@ class CreateAdminsLogTable extends Migration
             $table->string('logable_type');
             $table->longText('message')->nullable();
             $table->timestamp('done_at')->nullable();
+            $table->timestamp('restored_at')->nullable();
         });
     }
 

@@ -25,8 +25,8 @@ class CarsController extends Controller
 
     public function index()
     {
-        $admins = $this->carRepo->getAll();
-        return view("admin.cars.index", compact("admins"));
+        $cars = $this->carRepo->getAll();
+        return view("admin.cars.index", compact("cars"));
     }
 
     public function create()

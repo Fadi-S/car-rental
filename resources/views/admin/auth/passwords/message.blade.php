@@ -107,7 +107,7 @@
 
                                 <tr>
                                     <td class="content-block" itemprop="handler" valign="top">
-                                        <a href="{{ url(\Config::get("admin").'/password/reset/'.$token) }}" class="btn btn-primary" itemprop="url">
+                                        <a href="{{ url($adminUrl.'/password/reset/'.$token) }}" class="btn btn-primary" itemprop="url">
                                             Reset Password
                                         </a>
                                     </td>

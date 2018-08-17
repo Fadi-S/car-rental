@@ -6,7 +6,7 @@
     <ol class="breadcrumb">
         <li><a href="{{ url($adminUrl) }}">Dashboard</a></li>
         <li><a href="{{ url("$adminUrl/cars") }}">Cars</a></li>
-        <li class="active">Create Car</li>
+        <li class="active">Create</li>
     </ol>
     <div>
         {!! Form::open([ 'method'=>'POST', 'url'=>url($adminUrl . '/cars/') ]) !!}

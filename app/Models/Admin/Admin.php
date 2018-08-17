@@ -12,7 +12,7 @@ class Admin extends Authenticatable
     use Notifiable, SoftDeletes, AdminAttributes, AdminRelationships, AdminMethods;
 
     protected $hidden = ["password", "remember_token"];
-    protected $guarded = [];
+    protected $fillable = ["name", "username", "email", "phone", "password", "role_id", "location_id", "department"];
     protected $dates = [
         "deleted_at",
         "archived_at"

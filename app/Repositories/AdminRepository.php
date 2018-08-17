@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Http\Requests\Admin\AdminRequest;
 use App\Models\Admin\Admin;
 use App\Models\AdminLog\AdminLog;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AdminRepository
@@ -70,6 +71,21 @@ class AdminRepository
             flash()->error("Old Password doesn't match!")->important();
             return false;
         }
+    }
 
+    public function getActivities($paginate = 100)
+    {
+        return AdminLog::orderBy("done_at", 'desc')->paginate($paginate);
+    }
+
+    public function restoreActivity(AdminLog $activity)
+    {
+        if($activity->action() == "delete") {
+            $activity->logged()->restore();
+            AdminLog::createRecord("restore", $activity->logged());
+            $activity->restored_at = Carbon::now();
+            $activity->save();
+            flash()->success($activity->humanReadableType() . ": " . $activity->logged()->name . " was restored successfully");
+        }
     }
 }

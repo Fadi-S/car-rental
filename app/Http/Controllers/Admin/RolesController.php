@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\Admin\RoleRequest;
 use App\Models\Role\Role;
 use App\Http\Controllers\Controller;
-use App\Repositories\Admin\RoleRepository;
+use App\Repositories\RoleRepository;
 
 class RolesController extends Controller
 {

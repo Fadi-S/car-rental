@@ -2,6 +2,7 @@
 
 namespace App\Models\AdminLog;
 
+use App\Models\Admin\Admin;
 use Illuminate\Database\Eloquent\Model;
 
 trait AdminLogMethods {
@@ -16,9 +17,20 @@ trait AdminLogMethods {
         $Logged = $this->logable_type;
         return $Logged::withTrashed()->find($this->logable_id);
     }
+
+    public function creator()
+    {
+        return Admin::withTrashed()->find($this->admin_id);
+    }
+
     public function old()
     {
         return $this->message['old'];
+    }
+
+    public function humanReadableType()
+    {
+        return str_replace('App\\Models\\', '', $this->logable_type);
     }
 
     public function new()
@@ -31,8 +43,14 @@ trait AdminLogMethods {
         if($action == 'edit') {
             $old = [];
             $new = [];
+
+            $fields = $logable->getFillable();
+            if(sizeof($fields) == 0)
+                $fields = \Schema::getColumnListing($logable->getTable());
+            $fields = array_merge($fields, $relations);
+
             foreach($keys as $key) {
-                if(in_array($key, array_merge($logable->getFillable(), $relations) )) {
+                if(in_array($key,  $fields)) {
                     if(in_array($key, $relations)) {
                         if($logable->$key->pluck(key($relations))->toArray() != $values[$key]) {
                             $old[$key] = $logable->$key->pluck(key($relations))->toArray();

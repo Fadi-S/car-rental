@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Admin;
+namespace App\Repositories;
 
 use App\Http\Requests\Admin\RoleRequest;
 use App\Models\AdminLog\AdminLog;

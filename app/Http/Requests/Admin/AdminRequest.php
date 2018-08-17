@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Http\Helpers\Slug;
+use App\Models\Admin\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -48,5 +50,19 @@ class AdminRequest extends FormRequest
         }
 
         return $rules;
+    }
+
+    protected function getValidatorInstance()
+    {
+        $data = $this->all();
+        if($this->method() == "POST") {
+            $data['username'] = Slug::createSlug(Admin::class, ".", $this->name, "username");
+        }else if($this->method() == "PATCH") {
+            $user = $this->route("admin");
+            if($user->name != $this->name)
+                $data['username'] = Slug::createSlug(Admin::class, ".", $this->name, "username");
+        }
+        $this->getInputSource()->replace($data);
+        return parent::getValidatorInstance();
     }
 }

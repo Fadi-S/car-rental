@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\AdminRequest;
 use App\Models\Admin\Admin;
+use App\Models\AdminLog\AdminLog;
 use App\Repositories\AdminRepository;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -21,6 +22,7 @@ class AdminsController extends Controller
         $this->middleware("permission:add_admin", ['only' => "create"]);
         $this->middleware("permission:edit_admin", ['only' => "edit"]);
         $this->middleware("permission:view_admin", ['only' => ["show", "index"] ]);
+        $this->middleware("permission:activity_admin", ['only' => "showActivity"]);
     }
 
     public function index()
@@ -71,5 +73,18 @@ class AdminsController extends Controller
     {
         $this->adminRepo->changePassword($request, auth()->guard("admin")->user());
         return redirect("$this->adminUrl/change-password");
+    }
+
+    public function showActivity()
+    {
+        $activities = $this->adminRepo->getActivities();
+        $admin = auth()->guard("admin")->user();
+        return view("admin.admins.activity", compact("activities", "admin"));
+    }
+
+    public function restoreActivity(AdminLog $activity)
+    {
+        $this->adminRepo->restoreActivity($activity);
+        return redirect()->back();
     }
 }

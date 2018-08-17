@@ -7,8 +7,8 @@ use App\Models\CarCategory\CarCategory;
 use App\Models\CarEdition\CarEdition;
 use App\Models\CarOctane\CarOctane;
 use App\Models\CarType\CarType;
+use App\Models\Location\Location;
 use App\Models\Role\Role;
-use Barryvdh\Reflection\DocBlock\Location;
 
 trait CarRelationships
 {

@@ -16,6 +16,7 @@ class CreateCarOctanesTable extends Migration
         Schema::create('car_octanes', function (Blueprint $table) {
             $table->increments('id');
             $table->string("name")->unique();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
