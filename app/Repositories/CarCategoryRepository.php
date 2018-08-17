@@ -5,11 +5,15 @@ namespace App\Repositories;
 use App\Models\AdminLog\AdminLog;
 use App\Models\CarCategory\CarCategory;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CarCategoryRepository
 {
     public function create(Request $request)
     {
+        $request->validate([
+            'name' => "required|unique:car_categories",
+        ]);
         $category = CarCategory::create($request->all());
         if (!is_null($category)) {
             AdminLog::createRecord("add", $category);
@@ -22,6 +26,12 @@ class CarCategoryRepository
 
     public function update(Request $request, CarCategory $category)
     {
+        $request->validate([
+            'name' => [
+                "required",
+                Rule::unique('car_categories')->ignore($category->id)
+            ],
+        ]);
         if (!AdminLog::createRecord("edit", $category, $request->keys(), $request->all())) {
             flash()->error("You didn't change anything!");
             return false;

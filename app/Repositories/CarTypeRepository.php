@@ -5,11 +5,15 @@ namespace App\Repositories;
 use App\Models\AdminLog\AdminLog;
 use App\Models\CarType\CarType;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CarTypeRepository
 {
     public function create(Request $request)
     {
+        $request->validate([
+            'name' => "required|unique:car_types",
+        ]);
         $type = CarType::create($request->all());
         if (!is_null($type)) {
             AdminLog::createRecord("add", $type);
@@ -22,6 +26,13 @@ class CarTypeRepository
 
     public function update(Request $request, CarType $type)
     {
+        $request->validate([
+            'name' => [
+                "required",
+                Rule::unique('car_types')->ignore($type->id)
+            ],
+        ]);
+
         if (!AdminLog::createRecord("edit", $type, $request->keys(), $request->all())) {
             flash()->error("You didn't change anything!");
             return false;

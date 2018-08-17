@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class RoleRequest extends FormRequest
 {
@@ -18,8 +19,20 @@ class RoleRequest extends FormRequest
 
     public function rules()
     {
-        return [
-            'name' => "required",
+        $rules = [
+            'name' => "required|unique:roles",
+            'permissions' => "required",
         ];
+
+        if($this->method() == "PATCH")
+            $rules = [
+                'name' => [
+                    "required",
+                    Rule::unique('roles')->ignore($this->route("role")->id)
+                ],
+                'permissions' => "required",
+            ];
+
+        return $rules;
     }
 }

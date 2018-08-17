@@ -5,11 +5,15 @@ namespace App\Repositories;
 use App\Models\AdminLog\AdminLog;
 use App\Models\Location\Location;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class LocationRepository
 {
     public function create(Request $request)
     {
+        $request->validate([
+            'name' => "required|unique:locations",
+        ]);
         $location = Location::create($request->all());
         if (!is_null($location)) {
             AdminLog::createRecord("add", $location);
@@ -22,6 +26,12 @@ class LocationRepository
 
     public function update(Request $request, Location $location)
     {
+        $request->validate([
+            'name' => [
+                "required",
+                Rule::unique('locations')->ignore($location->id)
+            ],
+        ]);
         if (!AdminLog::createRecord("edit", $location, $request->keys(), $request->all())) {
             flash()->error("You didn't change anything!");
             return false;

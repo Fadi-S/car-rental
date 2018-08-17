@@ -5,11 +5,15 @@ namespace App\Repositories;
 use App\Models\AdminLog\AdminLog;
 use App\Models\CarOctane\CarOctane;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CarOctaneRepository
 {
     public function create(Request $request)
     {
+        $request->validate([
+            'name' => "required|unique:car_octanes",
+        ]);
         $octane = CarOctane::create($request->all());
         if (!is_null($octane)) {
             AdminLog::createRecord("add", $octane);
@@ -22,6 +26,12 @@ class CarOctaneRepository
 
     public function update(Request $request, CarOctane $octane)
     {
+        $request->validate([
+            'name' => [
+                "required",
+                Rule::unique('car_octanes')->ignore($octane->id)
+            ],
+        ]);
         if (!AdminLog::createRecord("edit", $octane, $request->keys(), $request->all())) {
             flash()->error("You didn't change anything!");
             return false;

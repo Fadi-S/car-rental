@@ -110,11 +110,6 @@ trait PermissionMethods
                 'name'   => 'view_car',
                 'label'  => 'View Car',
             ],
-            [
-                'group'  => 'Cars',
-                'name'   => 'activity_car',
-                'label'  => 'View Cars Activity',
-            ],
 
         ];
         return $permissions;
