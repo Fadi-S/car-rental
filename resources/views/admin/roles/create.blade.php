@@ -7,7 +7,7 @@
 @endsection
 
 @section("content")
-    <h4 class="page-title">@lang("messages.create") @lang("messages.role")</h4>
+    <h4 class="page-title">Create Role</h4>
     <ol class="breadcrumb">
         <li><a href="{{ url($adminUrl) }}">Dashboard</a></li>
         <li><a href="{{ url("$adminUrl/roles") }}">Roles</a></li>

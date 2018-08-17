@@ -14,7 +14,6 @@ class ClientsController extends Controller
 
     public function __construct(ClientRepository $clientRepo)
     {
-        $this->middleware("auth:admin");
         $this->middleware("permission:add_client", ['only' => "create"]);
         $this->middleware("permission:edit_client", ['only' => "edit"]);
         $this->middleware("permission:view_client", ['only' => ["show", "index"] ]);

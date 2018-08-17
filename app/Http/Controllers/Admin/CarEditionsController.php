@@ -16,7 +16,6 @@ class CarEditionsController extends Controller
     {
         $this->editionRepo = $editionRepo;
         $this->adminUrl = \Config::get("app.admin_url");
-        $this->middleware("auth:admin");
         $this->middleware("permission:add_car", ['only' => "create"]);
         $this->middleware("permission:edit_car", ['only' => "edit"]);
         $this->middleware("permission:view_car", ['only' => ["show", "index"] ]);

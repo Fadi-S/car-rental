@@ -16,7 +16,6 @@ class RolesController extends Controller
     {
         $this->roleRepo = $roleRepo;
         $this->adminUrl = \Config::get("app.admin_url");
-        $this->middleware("auth:admin");
         $this->middleware("permission:add_role", ['only' => "create"]);
         $this->middleware("permission:edit_role", ['only' => "edit"]);
         $this->middleware("permission:view_role", ['only' => ["show", "index"] ]);

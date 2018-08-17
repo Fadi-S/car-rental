@@ -1,20 +1,20 @@
 <?php
 
 Route::prefix(Config::get("app.admin_url"))->group(function() {
-
     /* Login Routes */
     Route::get("login", 'Admin\Auth\LoginController@showLoginForm');
     Route::post("login", 'Admin\Auth\LoginController@login');
-
-    /* Logout Routes */
-    Route::post('logout', 'Admin\Auth\LoginController@logout');
 
     /* Password reset Routes */
     Route::get('password/reset', 'Admin\Auth\ForgotPasswordController@showLinkRequestForm');
     Route::post('password/email', 'Admin\Auth\ForgotPasswordController@sendResetLinkEmail');
     Route::get('password/reset/{token}', 'Admin\Auth\ResetPasswordController@showResetForm');
     Route::post('password/reset', 'Admin\Auth\ResetPasswordController@reset');
+});
 
+Route::prefix(Config::get("app.admin_url"))->middleware('auth:admin')->group(function() {
+    /* Logout Routes */
+    Route::post('logout', 'Admin\Auth\LoginController@logout');
 
     Route::get("/", 'Admin\DashboardController@index');
 

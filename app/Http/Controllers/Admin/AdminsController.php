@@ -18,7 +18,6 @@ class AdminsController extends Controller
     {
         $this->adminRepo = $adminRepo;
         $this->adminUrl = \Config::get("app.admin_url");
-        $this->middleware("auth:admin");
         $this->middleware("permission:add_admin", ['only' => "create"]);
         $this->middleware("permission:edit_admin", ['only' => "edit"]);
         $this->middleware("permission:view_admin", ['only' => ["show", "index"] ]);

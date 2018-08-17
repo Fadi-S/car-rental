@@ -16,7 +16,6 @@ class LocationsController extends Controller
     {
         $this->locationRepo = $locationRepo;
         $this->adminUrl = \Config::get("app.admin_url");
-        $this->middleware("auth:admin");
     }
 
     public function index()
