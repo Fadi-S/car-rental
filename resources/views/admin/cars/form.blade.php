@@ -39,7 +39,7 @@
                     <div class="peer">
                         <div class="checkbox checkbox-rectangle checkbox-info peers ai-c">
                             {!! Form::checkbox($field."__checkbox", 1, (($create) ? false : ($car[$field] != "") ), ['class'=>'peer', "id"=>$field]) !!}
-                            {!! Form::label($field."__checkbox", ucfirst(str_replace("_", " ", $field)), ['class'=>'peers peer-greed js-sb ai-c']) !!}
+                            {!! Form::label($field, ucfirst(str_replace("_", " ", $field)), ['class'=>'peers peer-greed js-sb ai-c']) !!}
                         </div>
                     </div>
                 </div>
