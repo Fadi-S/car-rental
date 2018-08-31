@@ -18,8 +18,9 @@ Route::prefix(Config::get("app.admin_url"))->middleware('auth:admin')->group(fun
 
     Route::get("/", 'Admin\DashboardController@index');
 
-    Route::get("/admins/activity", 'Admin\AdminsController@showActivity');
+    Route::get("/admins/activity", 'Admin\AdminsController@showActivity')->middleware("can:activity_admin");
     Route::post('/admins/activity/{activity}/restore', 'Admin\AdminsController@restoreActivity');
+
     Route::resources([
         "cars" => 'Admin\CarsController',
 
@@ -44,10 +45,6 @@ Route::prefix(Config::get("app.admin_url"))->middleware('auth:admin')->group(fun
 /* Login Routes */
 Route::get("login", 'User\Auth\LoginController@showLoginForm');
 Route::post("login", 'User\Auth\LoginController@login');
-
-/* Register Routes */
-Route::get("register", 'User\Auth\RegisterController@showRegisterForm');
-Route::post("register", 'User\Auth\RegisterController@register');
 
 /* Logout Routes */
 Route::post('logout', 'User\Auth\LoginController@logout');

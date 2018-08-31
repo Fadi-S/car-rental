@@ -2,7 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Http\Requests\Admin\AdminRequest;
+use App\Http\Requests\AdminRequest\CreateAdminRequest;
+use App\Http\Requests\AdminRequest\EditAdminRequest;
 use App\Models\Admin\Admin;
 use App\Models\AdminLog\AdminLog;
 use Carbon\Carbon;
@@ -10,19 +11,21 @@ use Illuminate\Http\Request;
 
 class AdminRepository
 {
-    public function create(AdminRequest $request)
+    public function create(CreateAdminRequest $request)
     {
         $admin = Admin::create($request->all());
         if (!is_null($admin)) {
+
             AdminLog::createRecord("add", $admin);
             flash()->success("Admin Created Successfully");
+
         } else {
             flash()->error("Error Creating Admin!")->important();
         }
         return $admin;
     }
 
-    public function update(AdminRequest $request, Admin $admin)
+    public function update(EditAdminRequest $request, Admin $admin)
     {
         if (!AdminLog::createRecord("edit", $admin, $request->keys(), $request->all())) {
             flash()->error("You didn't change anything!");

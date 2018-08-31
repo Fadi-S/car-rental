@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\CarRequest;
+use App\Http\Requests\CarRequest\CreateCarRequest;
+use App\Http\Requests\CarRequest\EditCarRequest;
 use App\Models\Car\Car;
 use App\Repositories\CarRepository;
 use App\Http\Controllers\Controller;
@@ -33,7 +35,7 @@ class CarsController extends Controller
         return view("admin.cars.create");
     }
 
-    public function store(CarRequest $request)
+    public function store(CreateCarRequest $request)
     {
         $this->carRepo->create($request);
 
@@ -50,7 +52,7 @@ class CarsController extends Controller
         return view("admin.cars.edit", compact("car"));
     }
 
-    public function update(CarRequest $request, Car $car)
+    public function update(EditCarRequest $request, Car $car)
     {
         $this->carRepo->update($request, $car);
 

@@ -1,20 +1,17 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\CarRequest;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CarRequest extends FormRequest
+class CreateCarRequest extends FormRequest
 {
-
     public function authorize()
     {
-        if($this->method() == "PATCH")
-            return auth()->guard('admin')->user()->hasPermission("edit_car");
-        else if($this->method() == "POST")
-            return auth()->guard('admin')->user()->hasPermission("add_car");
-        else
-            return false;
+        if($this->method() == "POST")
+            return auth()->guard('admin')->user()->can("add_car");
+
+        return false;
     }
 
 
@@ -29,5 +26,4 @@ class CarRequest extends FormRequest
             "price" => "required|numeric",
         ];
     }
-
 }

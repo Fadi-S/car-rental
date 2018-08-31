@@ -42,9 +42,11 @@
                     </div>
 
                     <ul class="nav navbar-nav navbar-right pull-right">
-                        <li class="hidden-xs">
-                            <a href="{{ url("$adminUrl/admins/activity") }}" class="waves-effect waves-light"><i class="fa fa-history"></i></a>
-                        </li>
+                        @can("activity_admin")
+                            <li class="hidden-xs">
+                                <a href="{{ url("$adminUrl/admins/activity") }}" class="waves-effect waves-light"><i class="fa fa-history"></i></a>
+                            </li>
+                        @endcan
 
                         <li class="dropdown top-menu-item-xs">
                             <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true"><img src="{{ $currentAdmin->picture }}" alt="user-img" class="img-circle"> </a>
@@ -95,13 +97,13 @@
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-users"></i> <span> Clients </span> <span class="menu-arrow"></span> </a>
                             <ul class="list-unstyled">
-                                @if($currentAdmin->hasPermission("add_client"))
+                                @can("add_client")
                                     <li><a href="{{ url("$adminUrl/clients/create") }}">Create Client</a></li>
-                                @endif
+                                @endcan
 
-                                @if($currentAdmin->hasPermission("view_client"))
+                                @can("view_client")
                                     <li><a href="{{ url("$adminUrl/clients") }}">All Clients</a></li>
-                                @endif
+                                @endcan
 
                             </ul>
                         </li>
@@ -111,13 +113,13 @@
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-user-secret"></i> <span> Admins </span> <span class="menu-arrow"></span> </a>
                             <ul class="list-unstyled">
-                                @if($currentAdmin->hasPermission("add_admin"))
+                                @can("add_admin")
                                     <li><a href="{{ url("$adminUrl/admins/create") }}">Create Admin</a></li>
-                                @endif
+                                @endcan
 
-                                @if($currentAdmin->hasPermission("view_admin"))
+                                @can("view_admin")
                                     <li><a href="{{ url("$adminUrl/admins") }}">All Admins</a></li>
-                                @endif
+                                @endcan
 
                             </ul>
                         </li>
@@ -128,7 +130,7 @@
                             <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-car"></i> <span> Cars </span> <span class="menu-arrow"></span> </a>
                             <ul class="list-unstyled">
 
-                                @if($currentAdmin->hasPermission("add_car"))
+                                @can("add_car")
                                     <li class="has_sub">
                                         <a href="javascript:void(0);" class="waves-effect"><span>Categories</span>  <span class="menu-arrow"></span></a>
                                         <ul style="">
@@ -162,11 +164,11 @@
                                     </li>
 
                                     <li><a href="{{ url("$adminUrl/cars/create") }}">Create Car</a></li>
-                                @endif
+                                @endcan
 
-                                @if($currentAdmin->hasPermission("view_car"))
+                                @can("view_car")
                                     <li><a href="{{ url("$adminUrl/cars") }}">All Cars</a></li>
-                                @endif
+                                @endcan
 
                             </ul>
                         </li>
@@ -176,11 +178,11 @@
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-map-marker"></i> <span> Locations </span> <span class="menu-arrow"></span> </a>
                             <ul class="list-unstyled">
-                                @if($currentAdmin->hasPermission("add_admin") || $currentAdmin->hasPermission("add_car") || $currentAdmin->hasPermission("add_client"))
+                                @if($currentAdmin->can("add_admin") || $currentAdmin->can("add_car") || $currentAdmin->can("add_client"))
                                     <li><a href="{{ url("$adminUrl/locations/create") }}">Create Locations</a></li>
                                 @endif
 
-                                @if($currentAdmin->hasPermission("view_admin") || $currentAdmin->hasPermission("view_car") || $currentAdmin->hasPermission("view_calint"))
+                                @if($currentAdmin->can("view_admin") || $currentAdmin->can("view_car") || $currentAdmin->can("view_calint"))
                                     <li><a href="{{ url("$adminUrl/locations") }}">All Locations</a></li>
                                 @endif
 
@@ -192,13 +194,13 @@
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-cogs"></i> <span> Roles </span> <span class="menu-arrow"></span> </a>
                             <ul class="list-unstyled">
-                                @if($currentAdmin->hasPermission("add_role"))
+                                @can("add_role")
                                     <li><a href="{{ url("$adminUrl/roles/create") }}">Create Role</a></li>
-                                @endif
+                                @endcan
 
-                                @if($currentAdmin->hasPermission("view_role"))
+                                @can("view_role")
                                     <li><a href="{{ url("$adminUrl/roles") }}">All Roles</a></li>
-                                @endif
+                                @endcan
 
                             </ul>
                         </li>

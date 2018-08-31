@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\Admin\AdminRequest;
+use App\Http\Requests\AdminRequest\CreateAdminRequest;
+use App\Http\Requests\AdminRequest\EditAdminRequest;
 use App\Models\Admin\Admin;
 use App\Models\AdminLog\AdminLog;
 use App\Repositories\AdminRepository;
@@ -21,7 +22,6 @@ class AdminsController extends Controller
         $this->middleware("permission:add_admin", ['only' => "create"]);
         $this->middleware("permission:edit_admin", ['only' => "edit"]);
         $this->middleware("permission:view_admin", ['only' => ["show", "index"] ]);
-        $this->middleware("permission:activity_admin", ['only' => "showActivity"]);
     }
 
     public function index()
@@ -45,13 +45,13 @@ class AdminsController extends Controller
         return view('admin.admins.create');
     }
 
-    public function store(AdminRequest $request)
+    public function store(CreateAdminRequest $request)
     {
         $this->adminRepo->create($request);
         return redirect("$this->adminUrl/admins/create");
     }
 
-    public function update(AdminRequest $request, Admin $admin)
+    public function update(EditAdminRequest $request, Admin $admin)
     {
         $this->adminRepo->update($request, $admin);
         return redirect("$this->adminUrl/admins/$admin->username/edit");

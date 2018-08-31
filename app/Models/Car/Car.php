@@ -11,14 +11,15 @@ class Car extends Model
 
     public static $excluded =
         [
-            "created_at", "updated_at", "deleted_at", "archived_at", "location_id", "category_id", "type_id", "octane_id", "edition_id", "price"
+            "created_at", "updated_at", "deleted_at", "archived_at", "location_id", "category_id", "type_id", "octane_id", "edition_id", "price", "client_id", "sold_at"
         ];
 
     protected $table = "cars";
     protected $guarded = [];
     protected $dates = [
         "deleted_at",
-        "archived_at"
+        "archived_at",
+        "sold_at"
     ];
 
 }

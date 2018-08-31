@@ -2,9 +2,11 @@
 
 namespace App\Repositories;
 
-use App\Http\Requests\Admin\CarRequest;
+use App\Http\Requests\CarRequest\CreateCarRequest;
+use App\Http\Requests\CarRequest\EditCarRequest;
 use App\Models\AdminLog\AdminLog;
 use App\Models\Car\Car;
+use Illuminate\Http\Request;
 
 class CarRepository
 {
@@ -14,7 +16,7 @@ class CarRepository
         return Car::paginate($pagination);
     }
 
-    public function create(CarRequest $request)
+    public function create(CreateCarRequest $request)
     {
         $car = Car::create($this->getValues($request));
 
@@ -29,7 +31,7 @@ class CarRepository
         return $car;
     }
 
-    private function getValues(CarRequest $request)
+    private function getValues(Request $request)
     {
         $finalKeys = array_diff(\Schema::getColumnListing("cars"), Car::$excluded, ["id"]);
         $values = [];
@@ -48,7 +50,7 @@ class CarRepository
         return array_merge($request->only(Car::$excluded), $values);
     }
 
-    public function update(CarRequest $request, Car $car)
+    public function update(EditCarRequest $request, Car $car)
     {
         $values = $this->getValues($request);
         AdminLog::createRecord("edit", $car, $request->keys(), $values);
