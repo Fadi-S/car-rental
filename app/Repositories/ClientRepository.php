@@ -2,14 +2,15 @@
 
 namespace App\Repositories;
 
-use App\Http\Requests\Admin\ClientRequest;
+use App\Http\Requests\ClientRequest\CreateClientRequest;
+use App\Http\Requests\ClientRequest\EditClientRequest;
 use App\Models\AdminLog\AdminLog;
 use App\Models\Client\Client;
 
 class ClientRepository
 {
 
-    public function create(ClientRequest $request)
+    public function create(CreateClientRequest $request)
     {
         $client = Client::create($request->all());
         if (!is_null($client)) {
@@ -21,7 +22,7 @@ class ClientRepository
         return $client;
     }
 
-    public function update(ClientRequest $request, Client $client)
+    public function update(EditClientRequest $request, Client $client)
     {
         if (!AdminLog::createRecord("edit", $client, $request->keys(), $request->all())) {
             flash()->error("You didn't change anything!");

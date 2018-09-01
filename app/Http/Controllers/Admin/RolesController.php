@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\Admin\RoleRequest;
+use App\Http\Requests\RoleRequest\CreateRoleRequest;
+use App\Http\Requests\RoleRequest\EditRoleRequest;
 use App\Models\Role\Role;
 use App\Http\Controllers\Controller;
 use App\Repositories\RoleRepository;
@@ -37,13 +38,13 @@ class RolesController extends Controller
         return view('admin.roles.create');
     }
 
-    public function store(RoleRequest $request)
+    public function store(CreateRoleRequest $request)
     {
         $this->roleRepo->create($request);
         return redirect("$this->adminUrl/roles/create");
     }
 
-    public function update(RoleRequest $request, Role $role)
+    public function update(EditRoleRequest $request, Role $role)
     {
         $this->roleRepo->edit($request, $role);
         return redirect("$this->adminUrl/roles/$role->id/edit");

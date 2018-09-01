@@ -3,12 +3,14 @@
 namespace App\Repositories;
 
 use App\Http\Requests\Admin\RoleRequest;
+use App\Http\Requests\RoleRequest\CreateRoleRequest;
+use App\Http\Requests\RoleRequest\EditRoleRequest;
 use App\Models\AdminLog\AdminLog;
 use App\Models\Role\Role;
 
 class RoleRepository
 {
-    public function create(RoleRequest $request)
+    public function create(CreateRoleRequest $request)
     {
         $role = Role::create($request->only(['name']));
         if (!is_null($role)) {
@@ -26,7 +28,7 @@ class RoleRepository
         }
     }
 
-    public function edit(RoleRequest $request, Role $role)
+    public function edit(EditRoleRequest $request, Role $role)
     {
         $request->request->set('permissions',
             array_intersect(

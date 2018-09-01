@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\Admin\ClientRequest;
+use App\Http\Requests\ClientRequest\CreateClientRequest;
+use App\Http\Requests\ClientRequest\EditClientRequest;
 use App\Models\Client\Client;
 use App\Repositories\ClientRepository;
 use App\Http\Controllers\Controller;
@@ -33,7 +34,7 @@ class ClientsController extends Controller
         return view("admin.clients.create");
     }
 
-    public function store(ClientRequest $request)
+    public function store(CreateClientRequest $request)
     {
         $this->clientRepo->create($request);
 
@@ -50,7 +51,7 @@ class ClientsController extends Controller
         return view("admins.clients.edit", compact("client"));
     }
 
-    public function update(ClientRequest $request, Client $client)
+    public function update(EditClientRequest $request, Client $client)
     {
         $this->clientRepo->update($request, $client);
 
