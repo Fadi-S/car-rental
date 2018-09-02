@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Http\Requests\ClientRequest\CreateClientRequest;
 use App\Http\Requests\ClientRequest\EditClientRequest;
+use App\Mail\ClientCreated;
 use App\Models\AdminLog\AdminLog;
 use App\Models\Client\Client;
 
@@ -13,12 +14,18 @@ class ClientRepository
     public function create(CreateClientRequest $request)
     {
         $client = Client::create($request->all());
+
         if (!is_null($client)) {
+
+            \Mail::to($client)->send(new ClientCreated($client, $request->password));
+
             AdminLog::createRecord("add", $client);
+
             flash()->success("Client Created Successfully");
-        } else {
+
+        } else
             flash()->error("Error Creating Client!")->important();
-        }
+
         return $client;
     }
 

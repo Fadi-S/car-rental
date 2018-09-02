@@ -44,7 +44,7 @@ class CarsController extends Controller
 
     public function show(Car $car)
     {
-        return view("admin.car.show", compact("car"));
+        return view("admin.cars.show", compact("car"));
     }
 
     public function edit(Car $car)

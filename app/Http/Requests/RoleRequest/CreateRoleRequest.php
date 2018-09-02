@@ -8,10 +8,7 @@ class CreateRoleRequest extends FormRequest
 {
     public function authorize()
     {
-        if($this->method() == "POST")
-            return auth()->guard('admin')->user()->can("add_role");
-
-        return false;
+        return auth()->guard('admin')->user()->can("add_role");
     }
 
     public function rules()

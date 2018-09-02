@@ -21,6 +21,7 @@ class CreateClientsTable extends Migration
             $table->string("phone")->nullable();
             $table->text("note")->nullable();
             $table->text("password")->nullable();
+            $table->text("picture")->nullable();
             $table->integer("location_id")->nullable();
             $table->integer("area_id")->nullable();
             $table->timestamp("archived_at")->nullable();

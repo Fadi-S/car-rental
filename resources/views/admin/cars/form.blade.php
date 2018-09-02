@@ -30,6 +30,11 @@
             {!! Form::label("price", "Car Price *") !!}
             {!! Form::number("price", null, ["class" => "form-control", "placeholder" => "Price", "min"=>"1"]) !!}
         </div>
+
+        <div class="form-group col-md-6">
+            {!! Form::label("client_id", "Seller *") !!}
+            {!! Form::select("client_id", $clients, null, ["class" => "form-control"]) !!}
+        </div>
     </div>
 
     <div class="col-md-12">

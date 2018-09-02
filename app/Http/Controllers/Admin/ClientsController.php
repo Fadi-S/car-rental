@@ -25,8 +25,8 @@ class ClientsController extends Controller
 
     public function index()
     {
-        $admins = $this->clientRepo->getAll();
-        return view("admin.clients.index", compact("admins"));
+        $clients = $this->clientRepo->getAll();
+        return view("admin.clients.index", compact("clients"));
     }
 
     public function create()
@@ -43,19 +43,19 @@ class ClientsController extends Controller
 
     public function show(Client $client)
     {
-        return view("admins.client.show", compact("client"));
+        return view("admin.client.show", compact("client"));
     }
 
     public function edit(Client $client)
     {
-        return view("admins.clients.edit", compact("client"));
+        return view("admin.clients.edit", compact("client"));
     }
 
     public function update(EditClientRequest $request, Client $client)
     {
         $this->clientRepo->update($request, $client);
 
-        return redirect($this->adminUrl . "/clients/$client->id/edit");
+        return redirect($this->adminUrl . "/clients/$client->username/edit");
     }
 
     public function destroy(Client $client)

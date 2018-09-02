@@ -10,10 +10,7 @@ class CreateAdminRequest extends FormRequest
 {
     public function authorize()
     {
-        if($this->method() == "POST")
-            return auth()->guard('admin')->user()->can("add_admin");
-
-        return false;
+        return auth()->guard('admin')->user()->can("add_admin");
     }
 
     public function rules()

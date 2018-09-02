@@ -15,4 +15,9 @@ class Client extends Authenticatable
         "deleted_at",
         "archived_at"
     ];
+
+    public function getRouteKeyName()
+    {
+        return "username";
+    }
 }

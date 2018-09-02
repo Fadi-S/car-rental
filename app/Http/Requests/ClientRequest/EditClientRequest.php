@@ -11,10 +11,7 @@ class EditClientRequest extends FormRequest
 {
     public function authorize()
     {
-        if($this->method() == "PATCH")
-            return auth()->guard('admin')->user()->can("edit_client");
-
-            return false;
+        return auth()->guard('admin')->user()->can("edit_client");
     }
 
     public function rules()
@@ -23,14 +20,17 @@ class EditClientRequest extends FormRequest
 
             'name' => "required",
 
-            'username' => Rule::unique('clients')->ignore($this->route("admin")->id),
+            'username' => Rule::unique('clients')->ignore($this->route("client")->id),
 
             'email' => [
                 "required",
                 "email",
-                Rule::unique('clients')->ignore($this->route("admin")->id)
-            ]
+                Rule::unique('clients')->ignore($this->route("client")->id)
+            ],
 
+            'location_id' => "required|numeric|notIn:0",
+
+            'area_id' => "required|numeric|notIn:0",
         ];
     }
 
@@ -38,7 +38,7 @@ class EditClientRequest extends FormRequest
     {
         $data = $this->all();
 
-        $user = $this->route("admin");
+        $user = $this->route("client");
         if($user->name != $this->name)
             $data['username'] = Slug::createSlug(Client::class, ".", $this->name, "username");
 

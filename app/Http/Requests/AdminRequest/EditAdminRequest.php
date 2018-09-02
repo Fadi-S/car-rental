@@ -11,10 +11,7 @@ class EditAdminRequest extends FormRequest
 {
     public function authorize()
     {
-        if($this->method() == "PATCH")
-            return auth()->guard('admin')->user()->can("edit_admin");
-
-        return false;
+        return auth()->guard('admin')->user()->can("edit_admin");
     }
 
     public function rules()

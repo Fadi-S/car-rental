@@ -9,10 +9,7 @@ class EditRoleRequest extends FormRequest
 {
     public function authorize()
     {
-        if($this->method() == "PATCH")
-            return auth()->guard('admin')->user()->can("edit_role");
-
-        return false;
+        return auth()->guard('admin')->user()->can("edit_role");
     }
 
     public function rules()

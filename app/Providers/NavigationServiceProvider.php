@@ -7,6 +7,8 @@ use App\Models\CarCategory\CarCategory;
 use App\Models\CarEdition\CarEdition;
 use App\Models\CarOctane\CarOctane;
 use App\Models\CarType\CarType;
+use App\Models\Client\Client;
+use App\Models\ClientArea\ClientArea;
 use App\Models\Location\Location;
 use App\Models\Permission\Permission;
 use App\Models\Role\Role;
@@ -22,6 +24,7 @@ class NavigationServiceProvider extends ServiceProvider
         $this->adminCarFormViewComposer();
         $this->adminAdminsFormViewComposer();
         $this->adminRolesFormViewComposer();
+        $this->adminClientsFormViewComposer();
     }
 
     public function adminUrlComposer()
@@ -52,6 +55,7 @@ class NavigationServiceProvider extends ServiceProvider
                 'editions' => array_merge(["0" => "-"], CarEdition::pluck("name", "id")->toArray()),
                 'octanes' => array_merge(["0" => "-"], CarOctane::pluck("name", "id")->toArray()),
                 'fields' => array_diff(\Schema::getColumnListing("cars"), Car::$excluded, ["id"]) ,
+                'clients' => array_merge(["0" => "-"], Client::pluck("name", "id")->toArray()),
             ]);
         });
     }
@@ -71,6 +75,16 @@ class NavigationServiceProvider extends ServiceProvider
         view()->composer("admin.admins.form", function($view) {
             $view->with([
                 'roles' => array_merge(["0" => "-"], Role::pluck("name", "id")->toArray()),
+                'locations' => array_merge(["0" => "-"], Location::pluck("name", "id")->toArray()),
+            ]);
+        });
+    }
+
+    public function adminClientsFormViewComposer()
+    {
+        view()->composer("admin.clients.form", function($view) {
+            $view->with([
+                'areas' => array_merge(["0" => "-"], ClientArea::pluck("name", "id")->toArray()),
                 'locations' => array_merge(["0" => "-"], Location::pluck("name", "id")->toArray()),
             ]);
         });
