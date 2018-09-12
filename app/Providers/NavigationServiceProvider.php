@@ -12,6 +12,7 @@ use App\Models\ClientArea\ClientArea;
 use App\Models\Location\Location;
 use App\Models\Permission\Permission;
 use App\Models\Role\Role;
+use App\Models\Status\Status;
 use Illuminate\Support\ServiceProvider;
 
 class NavigationServiceProvider extends ServiceProvider
@@ -56,6 +57,7 @@ class NavigationServiceProvider extends ServiceProvider
                 'octanes' => array_merge(["0" => "-"], CarOctane::pluck("name", "id")->toArray()),
                 'fields' => array_diff(\Schema::getColumnListing("cars"), Car::$excluded, ["id"]) ,
                 'clients' => array_merge(["0" => "-"], Client::pluck("name", "id")->toArray()),
+                'statuses' => array_merge(["0" => "-"], Status::pluck("name", "id")->toArray()),
             ]);
         });
     }

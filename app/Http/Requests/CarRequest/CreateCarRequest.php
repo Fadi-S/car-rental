@@ -30,6 +30,10 @@ class CreateCarRequest extends FormRequest
 
             "client_id" => "required|numeric|notIn:0",
 
+            "status_id" => "required|numeric|notIn:0",
+
+            "cover" => "image",
+
         ];
     }
 }

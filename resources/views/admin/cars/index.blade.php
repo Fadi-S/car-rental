@@ -17,12 +17,15 @@
         <table class="table data-table">
             <thead>
             <tr>
+                <th>Cover Image</th>
+                <th>Seller</th>
                 <th>Category</th>
                 <th>Edition</th>
                 <th>Type</th>
                 <th>Octane</th>
                 <th>Location</th>
                 <th>Price</th>
+                <th>Status</th>
                 <th>View</th>
                 <th>Edit</th>
             </tr>
@@ -31,12 +34,15 @@
             <tbody>
             @foreach($cars as $car)
                 <tr>
+                    <td><img src="{{ $car->cover }}" width="70" height="70"></td>
+                    <td>{{ $car->client->name }}</td>
                     <td>{{ $car->category->name }}</td>
                     <td>{{ $car->edition->name }}</td>
                     <td>{{ $car->type->name }}</td>
                     <td>{{ $car->octane->name }}</td>
                     <td>{{ $car->location->name }}</td>
                     <td>{{ $car->price }}</td>
+                    <td><span style="font-weight:bold; color:{{ $car->status->color }}">{{ $car->status->name }}</span></td>
                     <td><a href="{{ url("$adminUrl/cars/$car->id/") }}" class="btn btn-primary">View</a></td>
                     <td><a href="{{ url("$adminUrl/cars/$car->id/edit") }}" class="btn btn-info">Edit</a></td>
                 </tr>

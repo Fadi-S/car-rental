@@ -18,6 +18,9 @@ class CarRepository
 
     public function create(CreateCarRequest $request)
     {
+        if($request->hasFile("coverImage"))
+            $request->request->set("cover", $request->file("coverImage")->store("public/photos"));
+
         $car = Car::create($this->getValues($request));
 
         if (!is_null($car)) {
@@ -52,6 +55,9 @@ class CarRepository
 
     public function update(EditCarRequest $request, Car $car)
     {
+        if($request->hasFile("coverImage"))
+            $request->request->set("cover", $request->file("coverImage")->store("public/photos"));
+
         $values = $this->getValues($request);
         AdminLog::createRecord("edit", $car, $request->keys(), $values);
 

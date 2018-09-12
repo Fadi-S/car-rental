@@ -10,7 +10,7 @@
     </ol>
     <div>
         @include("delete", ["what"=>"Car", "url"=>url("$adminUrl/cars/$car->id")])
-        {!! Form::model($car, [ 'method'=>'PATCH', 'url'=>url($adminUrl . '/cars/' . $car->id) ]) !!}
+        {!! Form::model($car, [ 'method'=>'PATCH', 'url'=>url($adminUrl . '/cars/' . $car->id), 'files'=>"true" ]) !!}
         @include("admin.cars.form", ["create" => false, "submit" => "Edit Car"])
         {!! Form::close() !!}
     </div>

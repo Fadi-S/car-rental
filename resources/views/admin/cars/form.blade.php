@@ -35,6 +35,28 @@
             {!! Form::label("client_id", "Seller *") !!}
             {!! Form::select("client_id", $clients, null, ["class" => "form-control"]) !!}
         </div>
+
+        <div class="form-group col-md-6">
+            {!! Form::label("status_id", "Status *") !!}
+            {!! Form::select("status_id", $statuses, null, ["class" => "form-control"]) !!}
+        </div>
+
+
+        <div class="form-group col-md-6">
+            <label class="control-label">Cover Image *</label>
+
+            <input type="file" class="filestyle" data-iconname="fa fa-cloud-upload" id="filestyle-6"
+                   tabindex="-1" style="position: absolute; clip: rect(0px, 0px, 0px, 0px);" name="coverImage" accept="image/*">
+
+            <div class="bootstrap-filestyle input-group">
+                <span class="group-span-filestyle" tabindex="0">
+                    <label for="filestyle-6" class="btn btn-default">
+                        <span class="icon-span-filestyle glyphicon glyphicon-folder-open"></span> <span class="buttonText">Choose image</span>
+                    </label>
+                </span>
+            </div>
+        </div>
+
     </div>
 
     <div class="col-md-12">

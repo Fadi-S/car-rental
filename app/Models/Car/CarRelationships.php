@@ -7,8 +7,11 @@ use App\Models\CarCategory\CarCategory;
 use App\Models\CarEdition\CarEdition;
 use App\Models\CarOctane\CarOctane;
 use App\Models\CarType\CarType;
+use App\Models\Client\Client;
+use App\Models\Image\Image;
 use App\Models\Location\Location;
 use App\Models\Role\Role;
+use App\Models\Status\Status;
 
 trait CarRelationships
 {
@@ -41,6 +44,21 @@ trait CarRelationships
     public function location()
     {
         return $this->belongsTo(Location::class, 'location_id');
+    }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'client_id');
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class, 'status_id');
+    }
+
+    public function images()
+    {
+        return $this->belongsToMany(Image::class);
     }
 
 }

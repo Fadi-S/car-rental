@@ -9,7 +9,7 @@
         <li class="active">Create</li>
     </ol>
     <div>
-        {!! Form::open([ 'method'=>'POST', 'url'=>url($adminUrl . '/cars/') ]) !!}
+        {!! Form::open([ 'method'=>'POST', 'url'=>url($adminUrl . '/cars/'), 'files'=>"true" ]) !!}
         @include("admin.cars.form", ["create" => true, "submit" => "Create Car"])
         {!! Form::close() !!}
     </div>

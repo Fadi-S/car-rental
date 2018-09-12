@@ -116,11 +116,11 @@ class CreateCarsTable extends Migration
             $table->integer("octane_id");
             $table->integer("location_id");
             $table->integer("client_id");
+            $table->integer("status_id");
             $table->integer("price");
 
             $table->text("cover")->nullable();
 
-            $table->timestamp("sold_at")->nullable();
             $table->timestamp("archived_at")->nullable();
             $table->softDeletes();
             $table->timestamps();
