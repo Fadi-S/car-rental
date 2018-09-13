@@ -2,57 +2,47 @@
 
 @section("content")
     <div class="card-box col-md-12">
-        <a class="btn btn-success" style="color:white;" data-toggle="modal" data-target="#sold">
-            <span class="fa fa-dollar"></span> Sold
-        </a>
-        <div class="modal fade" id="sold">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <strong style="align-content: center; text-align: center; font-size: 15px;">Sold</strong>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    {!! Form::open(['method'=>'PATCH', 'url'=>url($adminUrl . '/cars/' . $car->id)]) !!}
-                    <div class="modal-body">
-                        For how much was this car sold?
-                        <input type="number" min="0" name="price" class="form-control">
-                        <input type="hidden" name="status_id" value="{{ \App\Models\Status\Status::where("name", "Sold")->first()->id }}">
-                    </div>
-                    <div class="modal-footer">
-                        <div class="mx-auto">
-                            <button class="btn btn-success" type="submit">Submit</button>&nbsp;
-                            <button class="btn btn-info" data-dismiss="modal">Cancel</button>
-                        </div>
-                    </div>
-                    {!! Form::close() !!}
-                </div>
+        <div class="row">
+            <div class="col-md-6">
+                <a class="btn btn-info ml-auto" style="color:white;" href="{{ url("$adminUrl/cars/$car->id/edit") }}">
+                    <span class="fa fa-edit"></span> Edit
+                </a>
             </div>
         </div>
 
-        <center><img width="20%" height="auto" class="img-thumbnail" src="{{ $car->cover }}"></center>
+        <br>
 
-        <center class="mx-auto">
-            <h3>
-                Admin: <a href="{{ url("$adminUrl/admins/" . $car->creator()->username) }}">{{ $car->creator()->name }}</a>
-            </h3>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+                <center><img width="100%" height="auto" style="margin-right: 10px;" class="img-thumbnail" src="{{ $car->cover }}"></center>
+            </div>
+            <div style="margin-left: 20px;">
+                <h3>Creator: <a href="{{ url("$adminUrl/admins/" . $car->creator()->username) }}">{{ $car->creator()->name }}</a></h3>
+                <h3>Seller: {{ $car->client->name }}</h3>
+                <h3>Status: <span style="font-weight: bold; color:{{ $car->status->color }};">{{ $car->status->name }}</span></h3>
 
-            <h3>
-                Seller: {{ $car->client->name }}
-            </h3>
+                <hr>
 
-            <h3>
-                Status: <span style="font-weight: bold; color:{{ $car->status->color }};">{{ $car->status->name }}</span>
-            </h3>
+                <h2 style="font-weight: bold; text-decoration: underline;">Car Information</h2>
 
-            <h3>
-                Price: {{ $car->price }} L.E.
-            </h3>
+                <h3>Price: {{ $car->price }} <strong>L.E.</strong></h3>
+                <h3>Category: {{ $car->category->name }}</h3>
+                <h3>Type: {{ $car->type->name }}</h3>
+                <h3>Edition: {{ $car->edition->name }}</h3>
+                <h3>Octane: {{ $car->octane->name }}</h3>
+                <h3>Location: {{ $car->location->name }}</h3>
 
-            <h3>
-                Location: {{ $car->location->name }}
-            </h3>
+                <hr>
 
-        </center>
+                @foreach($fields as $field)
+                    @if($car[$field])
+                        <h3>
+                            {{ ucfirst(str_replace("_", " ", $field)) }}: {{ $car[$field] }}
+                        </h3>
+                    @endif
+                @endforeach
+            </div>
+        </div>
     </div>
 @endsection
 

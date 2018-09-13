@@ -26,6 +26,7 @@ class NavigationServiceProvider extends ServiceProvider
         $this->adminAdminsFormViewComposer();
         $this->adminRolesFormViewComposer();
         $this->adminClientsFormViewComposer();
+        $this->adminCarShowViewComposer();
     }
 
     public function adminUrlComposer()
@@ -58,6 +59,15 @@ class NavigationServiceProvider extends ServiceProvider
                 'fields' => array_diff(\Schema::getColumnListing("cars"), Car::$excluded, ["id"]) ,
                 'clients' => array_merge(["0" => "-"], Client::pluck("name", "id")->toArray()),
                 'statuses' => array_merge(["0" => "-"], Status::pluck("name", "id")->toArray()),
+            ]);
+        });
+    }
+
+    public function adminCarShowViewComposer()
+    {
+        view()->composer("admin.cars.show", function($view) {
+            $view->with([
+                'fields' => array_diff(\Schema::getColumnListing("cars"), Car::$excluded, ["id"]) ,
             ]);
         });
     }

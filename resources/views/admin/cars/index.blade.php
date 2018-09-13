@@ -41,7 +41,7 @@
                     <td>{{ $car->type->name }}</td>
                     <td>{{ $car->octane->name }}</td>
                     <td>{{ $car->location->name }}</td>
-                    <td>{{ $car->price }}</td>
+                    <td>{{ $car->price }} <strong>L.E.</strong></td>
                     <td><span style="font-weight:bold; color:{{ $car->status->color }}">{{ $car->status->name }}</span></td>
                     <td><a href="{{ url("$adminUrl/cars/$car->id/") }}" class="btn btn-primary">View</a></td>
                     <td><a href="{{ url("$adminUrl/cars/$car->id/edit") }}" class="btn btn-info">Edit</a></td>
