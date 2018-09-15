@@ -56,6 +56,22 @@ class CarsController extends Controller
 
     public function update(EditCarRequest $request, Car $car)
     {
+        $images = [];
+
+        if($request->hasFile('files'))
+        {
+            foreach($request['files'] as $file)
+            {
+                $image = str_random(60) . '.' . $file->extension();
+
+                $file->storeAs('public/photos/cars' , $image);
+
+                $images[] = $image;
+            }
+        }
+
+        $request['images'] = $images;
+
         $this->carRepo->update($request, $car);
 
         return redirect($this->adminUrl . "/cars/$car->id/edit");

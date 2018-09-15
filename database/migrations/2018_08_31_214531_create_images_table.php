@@ -20,9 +20,10 @@ class CreateImagesTable extends Migration
         });
 
         Schema::create('car_image', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('car_id');
-            $table->integer("image_id");
-            $table->primary(['car_id', 'image_id']);
+            $table->text("path");
+            $table->timestamps();
         });
     }
 

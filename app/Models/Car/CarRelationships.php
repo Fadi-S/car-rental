@@ -8,7 +8,7 @@ use App\Models\CarEdition\CarEdition;
 use App\Models\CarOctane\CarOctane;
 use App\Models\CarType\CarType;
 use App\Models\Client\Client;
-use App\Models\Image\Image;
+use App\Models\CarImage\CarImage;
 use App\Models\Location\Location;
 use App\Models\Role\Role;
 use App\Models\Status\Status;
@@ -58,7 +58,7 @@ trait CarRelationships
 
     public function images()
     {
-        return $this->belongsToMany(Image::class);
+        return $this->hasMany(CarImage::class);
     }
 
 }

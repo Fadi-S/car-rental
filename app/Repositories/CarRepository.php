@@ -19,7 +19,7 @@ class CarRepository
     public function create(CreateCarRequest $request)
     {
         if($request->hasFile("coverImage"))
-            $request->request->set("cover", $request->file("coverImage")->store("public/photos"));
+            $request->request->set("cover", $request->file("coverImage")->store("public/photos/cars"));
 
         $car = Car::create($this->getValues($request));
 
@@ -62,11 +62,28 @@ class CarRepository
         AdminLog::createRecord("edit", $car, $request->keys(), $values);
 
         if ($car->update($values))
+        {   
+            $this->attachImages($car , $request);
             flash()->success("Car Updated Successfully");
+        }
         else
+        {
             flash()->error("Error Updating Car!")->important();
+        }
 
         return true;
+    }
+
+    public function attachImages($car , $request)
+    {
+
+        $car->images()->delete();
+        foreach($request['images'] as $image)
+        {
+            $car->images()->create([
+                'path' => $image
+            ]);
+        }
     }
 
     public function delete(Car $car)

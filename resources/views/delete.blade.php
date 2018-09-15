@@ -1,3 +1,4 @@
+<div class="form-group">
 <a class="btn btn-danger" style="color:white;" data-toggle="modal" data-target="#delete">Delete {{ $what }}</a>
 <div class="modal fade" id="delete">
 	<div class="modal-dialog">
@@ -19,6 +20,7 @@
 			{!! Form::close() !!}
 		</div>
 	</div>
+</div>
 </div>
 
 <script type="text/javascript">

@@ -10,7 +10,7 @@
     </ol>
     <div>
 
-        {!! Form::open([ 'method'=>'POST', 'url'=>url($adminUrl . '/cars/'), 'files'=>"true" ]) !!}
+        {!! Form::model($car = new \App\Models\Car\Car, [ 'method'=>'POST', 'url'=>url($adminUrl . '/cars/'), 'files'=>"true" ]) !!}
         @include("admin.cars.form", ["create" => true, "submit" => "Create Car"])
         {!! Form::close() !!}
 

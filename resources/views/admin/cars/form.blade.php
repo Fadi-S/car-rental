@@ -1,5 +1,67 @@
 
-<div class="card-box">
+<div class="row card-box">
+
+ <div class="form-group col-md-6">
+            <label class="control-label">Cover Image *</label>
+
+            <input type="file" class="filestyle" data-iconname="fa fa-cloud-upload" id="filestyle-6"
+                   tabindex="-1" style="position: absolute; clip: rect(0px, 0px, 0px, 0px);" name="coverImage" accept="image/*">
+
+            <div class="bootstrap-filestyle input-group">
+                <span class="group-span-filestyle" tabindex="0">
+                    <label for="filestyle-6" class="btn btn-default">
+                        <span class="icon-span-filestyle glyphicon glyphicon-folder-open"></span> <span class="buttonText">Upload Cover Photo</span>
+                    </label>
+                </span>
+            </div>
+        </div>
+
+        @if($car->getOriginal('cover'))
+            <div class="form-group col-md-6">
+            {!! Form::label("cover" , 'Current Cover') !!}
+                <img src="{{ $car->cover }}" width="450px" height="150px" alt="...">
+            </div>
+        @endif
+
+</div>
+
+<div class="row card-box">
+
+ <div class="row form-group">
+            <div class="col-md-12">
+                {!! Form::label("image" , 'Car Images Add images') !!}
+                <input type="file" name="files[]" multiple>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-md-12">
+            <table class="table data-table">
+            <thead>
+            <tr>
+                <th>Image</th>
+                <th>Edit</th>
+                <th>delete</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            @foreach($car->images as $image)
+                <tr>
+                    <td><img src="{{ $image->path }}" width="100px" height="100px" alt="..."></td>
+                    <td><a href="" class="btn btn-primary">Edit</a></td>
+                    <td><a href="" class="btn btn-danger">delete</a></td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+            </div>
+
+       </div> 
+
+</div>
+
+<div class="row card-box">
 
     <div class="row">
         <div class="form-group col-md-6">
@@ -42,24 +104,7 @@
             {!! Form::select("status_id", $statuses, null, ["class" => "form-control"]) !!}
         </div>
 
-
-        <div class="form-group col-md-6">
-            <label class="control-label">Cover Image *</label>
-
-            <input type="file" class="filestyle" data-iconname="fa fa-cloud-upload" id="filestyle-6"
-                   tabindex="-1" style="position: absolute; clip: rect(0px, 0px, 0px, 0px);" name="coverImage" accept="image/*">
-
-            <div class="bootstrap-filestyle input-group">
-                <span class="group-span-filestyle" tabindex="0">
-                    <label for="filestyle-6" class="btn btn-default">
-                        <span class="icon-span-filestyle glyphicon glyphicon-folder-open"></span> <span class="buttonText">Choose image</span>
-                    </label>
-                </span>
-            </div>
-        </div>
-
-
-    </div>
+           
 
     <div class="col-md-12">
         @foreach($fields as $field)
