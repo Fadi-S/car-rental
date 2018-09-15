@@ -13,7 +13,7 @@ class Car extends Model
         [
             "created_at", "updated_at", "deleted_at", "archived_at", "location_id",
             "category_id", "type_id", "octane_id", "edition_id", "price", "client_id",
-            "sold_at", "cover", "status_id",
+            "sold_at", "cover", "status_id"
         ];
 
     protected $table = "cars";

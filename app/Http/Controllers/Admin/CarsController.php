@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\Admin\CarRequest;
 use App\Http\Requests\CarRequest\CreateCarRequest;
 use App\Http\Requests\CarRequest\EditCarRequest;
 use App\Models\Car\Car;
-use App\Models\Image\Image;
 use App\Repositories\CarRepository;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class CarsController extends Controller
 {
@@ -39,22 +36,6 @@ class CarsController extends Controller
 
     public function store(CreateCarRequest $request)
     {
-        $images = [];
-
-        if($request->hasFile('files'))
-        {
-            foreach($request['files'] as $file)
-            {
-                $image = str_random(60) . '.' . $file->extension();
-
-                $file->storeAs('public/photos/cars' , $image);
-
-                $images[] = $image;
-            }
-        }
-
-        $request['images'] = $images;
-
         $this->carRepo->create($request);
 
         return redirect($this->adminUrl . "/cars/create");
@@ -72,22 +53,6 @@ class CarsController extends Controller
 
     public function update(EditCarRequest $request, Car $car)
     {
-        $images = [];
-
-        if($request->hasFile('files'))
-        {
-            foreach($request['files'] as $file)
-            {
-                $image = str_random(60) . '.' . $file->extension();
-
-                $file->storeAs('public/photos/cars' , $image);
-
-                $images[] = $image;
-            }
-        }
-
-        $request['images'] = $images;
-
         $this->carRepo->update($request, $car);
 
         return redirect($this->adminUrl . "/cars/$car->id/edit");
@@ -98,16 +63,6 @@ class CarsController extends Controller
         $this->carRepo->delete($car);
 
         return redirect($this->adminUrl . "/cars");
-    }
-
-    public function imagesUpload(Request $request, Car $car)
-    {
-        dd($request->file);
-        $filePath = $request->file("file")->store("public/photos/gallery");
-        $image = Image::create(["path" => $filePath]);
-        $car->images()->attach($image->id);
-
-        return response(200);
     }
 
 }

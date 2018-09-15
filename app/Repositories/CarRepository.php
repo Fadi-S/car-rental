@@ -18,6 +18,8 @@ class CarRepository
 
     public function create(CreateCarRequest $request)
     {
+        $request['images'] = $this->uploadImages($request);
+
         if($request->hasFile("coverImage"))
             $request->request->set("cover", $request->file("coverImage")->store("public/photos/cars"));
 
@@ -25,7 +27,7 @@ class CarRepository
 
         if (!is_null($car)) 
         {
-            $this->attachImages($car , $request);
+            $this->attachImages($car, $request);
 
             AdminLog::createRecord("add", $car);
             flash()->success("Car Created Successfully");
@@ -57,6 +59,8 @@ class CarRepository
 
     public function update(EditCarRequest $request, Car $car)
     {
+        $request['images'] = $this->uploadImages($request);
+
         if($request->hasFile("coverImage"))
             $request->request->set("cover", $request->file("coverImage")->store("public/photos"));
 
@@ -76,14 +80,31 @@ class CarRepository
         return true;
     }
 
+    private function uploadImages(Request $request)
+    {
+        $images = [];
+
+        if($request->hasFile('files'))
+        {
+            foreach($request['files'] as $file)
+            {
+                $image = str_random(60) . '.' . $file->extension();
+
+                $file->storeAs('public/photos/cars' , $image);
+
+                $images[] = $image;
+            }
+        }
+
+        return $images;
+    }
+
     /**
      * Attach images to car
-     * 
-     * @param collection $car
-     * @param array $request
+     * @param Car $car
+     * @param Request $request
      */
-
-    public function attachImages($car , $request)
+    private function attachImages(Car $car , Request $request)
     {
         if(array_key_exists('images' , $request->all()))
         {

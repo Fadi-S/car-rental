@@ -1,7 +1,7 @@
 
 <div class="row card-box">
 
- <div class="form-group col-md-6">
+        <div class="form-group col-md-6">
             <label class="control-label">Cover Image *</label>
 
             <input type="file" class="filestyle" data-iconname="fa fa-cloud-upload" id="filestyle-6"
@@ -30,7 +30,7 @@
  <div class="row form-group">
             <div class="col-md-12">
                 {!! Form::label("image" , 'Upload Multiple images') !!}
-                <input type="file" name="files[]" multiple>
+                <input type="file" name="files[]" multiple accept="image/*">
             </div>
         </div>
 

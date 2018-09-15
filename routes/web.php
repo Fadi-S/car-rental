@@ -31,8 +31,6 @@ Route::prefix(Config::get("app.admin_url"))->middleware('auth:admin')->group(fun
         "roles" => 'Admin\RolesController',
     ]);
 
-    Route::post("cars/{car}/images", 'Admin\CarsController@imagesUpload');
-
     Route::resource("locations", 'Admin\LocationsController')->except("show");
     Route::resource("categories", 'Admin\CarCategoriesController')->except("show");
     Route::resource("editions", 'Admin\CarEditionsController')->except("show");
