@@ -1,6 +1,13 @@
 @extends("admin.master")
 
 @section("content")
+        
+        <ol class="breadcrumb">
+            <li><a href="{{ url($adminUrl) }}">Dashboard</a></li>
+            <li><a href="{{ url("$adminUrl/cars") }}">Cars</a></li>
+            <li class="active">{{ $car->title }}</li>
+        </ol>
+
     <div class="card-box">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -27,7 +34,7 @@
 
         <div class="card-box row">
             <div class="form-group">                
-                    <h2 style="font-weight: bold;">Car Information</h2>
+                    <h2 style="font-weight: bold;">Car details</h2>
                     <h3>Price: {{ $car->price }} <strong>L.E.</strong></h3>
                     <h3>Category: {{ $car->category->name }}</h3>
                     <h3>Type: {{ $car->type->name }}</h3>

@@ -14,4 +14,9 @@ trait CarAttributes
         return url(\Storage::url($path));
     }
 
+    public function getTitleAttribute()
+    {
+        return $this->model . ' - ' . $this->year;
+    }
+
 }
