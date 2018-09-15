@@ -23,7 +23,9 @@ class CarRepository
 
         $car = Car::create($this->getValues($request));
 
-        if (!is_null($car)) {
+        if (!is_null($car)) 
+        {
+            $this->attachImages($car , $request);
 
             AdminLog::createRecord("add", $car);
             flash()->success("Car Created Successfully");
@@ -74,15 +76,24 @@ class CarRepository
         return true;
     }
 
+    /**
+     * Attach images to car
+     * 
+     * @param collection $car
+     * @param array $request
+     */
+
     public function attachImages($car , $request)
     {
-
-        $car->images()->delete();
-        foreach($request['images'] as $image)
+        if(array_key_exists('images' , $request->all()))
         {
-            $car->images()->create([
-                'path' => $image
-            ]);
+            $car->images()->delete();
+            foreach($request['images'] as $image)
+            {
+                $car->images()->create([
+                    'path' => $image
+                ]);
+            }
         }
     }
 

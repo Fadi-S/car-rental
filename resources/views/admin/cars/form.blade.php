@@ -29,10 +29,12 @@
 
  <div class="row form-group">
             <div class="col-md-12">
-                {!! Form::label("image" , 'Car Images Add images') !!}
+                {!! Form::label("image" , 'Upload Multiple images') !!}
                 <input type="file" name="files[]" multiple>
             </div>
         </div>
+
+        @if(!$car->images->isEmpty())
 
         <div class="row form-group">
             <div class="col-md-12">
@@ -58,6 +60,8 @@
             </div>
 
        </div> 
+
+       @endif
 
 </div>
 

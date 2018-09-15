@@ -39,6 +39,22 @@ class CarsController extends Controller
 
     public function store(CreateCarRequest $request)
     {
+        $images = [];
+
+        if($request->hasFile('files'))
+        {
+            foreach($request['files'] as $file)
+            {
+                $image = str_random(60) . '.' . $file->extension();
+
+                $file->storeAs('public/photos/cars' , $image);
+
+                $images[] = $image;
+            }
+        }
+
+        $request['images'] = $images;
+
         $this->carRepo->create($request);
 
         return redirect($this->adminUrl . "/cars/create");
