@@ -46,7 +46,23 @@
             </div>
 
          <div class="card-box row">
-            
+            <table class="table data-table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Image</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            @foreach($car->images as $image)
+                <tr>
+                    <td>{{ $loop->index + 1 }}</td>
+                    <td><img src="{{ $image->path }}" width="100px" height="100px" alt="..."></td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
          </div>   
 @endsection
 
