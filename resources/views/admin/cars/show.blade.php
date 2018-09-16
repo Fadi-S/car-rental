@@ -1,12 +1,13 @@
 @extends("admin.master")
 
 @section("content")
-        
-        <ol class="breadcrumb">
-            <li><a href="{{ url($adminUrl) }}">Dashboard</a></li>
-            <li><a href="{{ url("$adminUrl/cars") }}">Cars</a></li>
-            <li class="active">{{ $car->title }}</li>
-        </ol>
+    <h4 class="page-title">View Car</h4>
+
+    <ol class="breadcrumb">
+        <li><a href="{{ url($adminUrl) }}">Dashboard</a></li>
+        <li><a href="{{ url("$adminUrl/cars") }}">Cars</a></li>
+        <li class="active">{{ $car->title }}</li>
+    </ol>
 
     <div class="card-box">
             <div class="row">
@@ -23,7 +24,7 @@
                         <span class="fa fa-edit"></span> Edit Car
                     </a>
                 </div>
-                <h2 style="font-weight: bold;">Basic Information</h2>
+                <h2 style="font-weight: bold;">Car Basic Information</h2>
 
                 <h3>Creator: <a href="{{ url("$adminUrl/admins/" . $car->creator()->username) }}">{{ $car->creator()->name }}</a></h3>
                 <h3>Seller: {{ $car->client->name }}</h3>
@@ -34,7 +35,8 @@
 
         <div class="card-box row">
             <div class="form-group">                
-                    <h2 style="font-weight: bold;">Car details</h2>
+                    <h2 style="font-weight: bold;">Car Details</h2>
+
                     <h3>Price: {{ $car->price }} <strong>L.E.</strong></h3>
                     <h3>Category: {{ $car->category->name }}</h3>
                     <h3>Type: {{ $car->type->name }}</h3>
@@ -53,6 +55,7 @@
             </div>
 
          <div class="card-box row">
+             <h2 style="font-weight: bold;">Car Images</h2>
             <table class="table data-table">
             <thead>
             <tr>

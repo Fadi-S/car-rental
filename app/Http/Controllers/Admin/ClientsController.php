@@ -43,7 +43,8 @@ class ClientsController extends Controller
 
     public function show(Client $client)
     {
-        return view("admin.client.show", compact("client"));
+        $cars = $this->clientRepo->getAllCars($client);
+        return view("admin.clients.show", compact("client", "cars"));
     }
 
     public function edit(Client $client)

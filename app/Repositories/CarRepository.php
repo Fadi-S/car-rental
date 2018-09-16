@@ -108,7 +108,9 @@ class CarRepository
     {
         if(array_key_exists('images' , $request->all()))
         {
-            $car->images()->delete();
+            if($request['images'])
+                $car->images()->delete();
+
             foreach($request['images'] as $image)
             {
                 $car->images()->create([

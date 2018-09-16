@@ -6,6 +6,7 @@
     <ol class="breadcrumb">
         <li><a href="{{ url($adminUrl) }}">Dashboard</a></li>
         <li><a href="{{ url("$adminUrl/cars") }}">Cars</a></li>
+        <li><a href="{{ url("$adminUrl/cars/$car->id") }}">{{ $car->title }}</a></li>
         <li class="active">Edit</li>
     </ol>
     <div>

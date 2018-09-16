@@ -49,6 +49,11 @@ class ClientRepository
         return Client::paginate($paginate);
     }
 
+    public function getAllCars(Client $client, $paginate = 100)
+    {
+        return $client->cars()->paginate($paginate);
+    }
+
     public function delete(Client $client)
     {
         if($client->delete()) {

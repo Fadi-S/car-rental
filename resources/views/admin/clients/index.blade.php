@@ -22,6 +22,7 @@
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Active</th>
+                <th>View</th>
                 @can("edit_client")
                     <th>Edit</th>
                 @endcan
@@ -39,6 +40,8 @@
                         <span class="fa fa-thumbs-o-{{ (is_null($client->archived_at)) ? "up" : "down" }}"
                               style="font-size:20px;color:{{ (is_null($client->archived_at)) ? "green" : "red" }};"></span>
                     </td>
+
+                    <td><a href="{{ url("$adminUrl/clients/$client->username") }}" class="btn btn-primary">View</a></td>
 
                     @can("edit_client")
                         <td><a href="{{ url("$adminUrl/clients/$client->username/edit") }}" class="btn btn-info">Edit</a></td>

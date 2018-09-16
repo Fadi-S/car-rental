@@ -18,6 +18,7 @@
             <thead>
             <tr>
                 <th>Cover Image</th>
+                <th>Title</th>
                 <th>Seller</th>
                 <th>Category</th>
                 <th>Edition</th>
@@ -35,6 +36,7 @@
             @foreach($cars as $car)
                 <tr>
                     <td><img src="{{ $car->cover }}" width="70" height="70"></td>
+                    <td>{{ $car->title }}</td>
                     <td>{{ $car->client->name }}</td>
                     <td>{{ $car->category->name }}</td>
                     <td>{{ $car->edition->name }}</td>
