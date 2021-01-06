@@ -36,9 +36,9 @@ class CarsController extends Controller
 
     public function store(CreateCarRequest $request)
     {
-        $this->carRepo->create($request);
+        $car = $this->carRepo->create($request);
 
-        return redirect($this->adminUrl . "/cars/create");
+        return redirect($this->adminUrl . "/cars/$car->id/edit");
     }
 
     public function show(Car $car)

@@ -32,7 +32,8 @@ class AdminsController extends Controller
 
     public function show(Admin $admin)
     {
-        return view('admin.admins.show', compact('admin'));
+        $cars = $admin->cars()->paginate(100);
+        return view('admin.admins.show', compact('admin', "cars"));
     }
 
     public function edit(Admin $admin)

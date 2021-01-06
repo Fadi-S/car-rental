@@ -1,0 +1,139 @@
+.slide-title{
+	background:#ff3333;
+color: #fff;
+    height: 61px;
+    padding: 13px;
+    width: 84px;	}
+.slide-title h2{
+	font-family:'Oswald', sans-serif;
+	font-size: 32px;
+    font-weight: bold;
+    margin: 0;
+	color:#fff;
+	}
+.slide-text-medium{
+	color:#21286d;
+	font-family:'Oswald', sans-serif;
+	font-size: 25px;
+	text-align:left;
+	width:440px;
+	line-height:30px;
+
+	}
+.slide-text-small{
+		color:#1d1d1d;
+		width:440px;
+		line-height:22px;
+		font-weight:600;
+		font-size:13px;
+	}			
+.slide-text-large-bg{
+	padding:1px;
+	width:637px;
+	}
+.slide-text-large-bg h2{
+	color: #FFFFFF;
+	text-align: left;
+	font-size: 55px;
+	line-height: 55px;
+	text-transform: uppercase;
+	font-weight: 600;
+	font-family: 'Open Sans', sans-serif;
+	margin: 0;
+	}	
+	.slide-text-small-bg{
+	background:none;
+	padding:1px;
+	width:300px;
+	float:right;
+	}
+.slide-text-small-bg h2{
+	color:#fff;
+	font-size:20px;
+	text-transform:uppercase;
+	line-height:20px;
+	text-align:center;
+	}	
+.slide-text-small h3{
+    color: #FFFFFF;
+    font-size: 38px;
+    line-height: 80px;
+    font-weight: 300;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0px;
+    font-family: 'Open Sans', sans-serif;
+    width: 95%;
+}
+ .fullwidthbanner-container{
+	width:100% !important;
+	position:relative;
+	padding:0;
+	overflow:hidden;
+}
+
+.fullwidthbanner-container .fullwidthabnner	{
+	width:100% !important;
+	height: 470px !important;
+	position:relative;
+}
+
+	.fullscreen-container {
+		width:100% !important;
+		position:relative;
+		padding:0;
+		height:100%;
+	}
+
+
+
+#video_link img {
+	max-width: 100%;
+}
+
+  @media only screen and (min-width: 960px) and (max-width: 1220px) {
+
+ 	/*	  .banner, .bannercontainer			{	width:960px; height:492px;}
+
+ 		  #video_link  ,#video_frame			{	width:960px; height:492px;}*/
+
+
+   }
+
+   @media only screen and (min-width: 768px) and (max-width: 959px) {
+
+ 		/*  .banner, .bannercontainer			{	width:760px; height:389px;}
+
+ 		  #video_link  ,#video_frame			{	width:760px; height:389px;}*/
+
+
+   }
+
+   @media only screen and (min-width: 480px) and (max-width: 767px) {
+		 /*  .banner, .bannercontainer		{	width:480px; height:246px;	}
+
+		   #video_link ,#video_frame			{	width:707px; height:396px;	}
+
+		 /*  #video_link ,#video_frame			{	width:504px; height:282px;	} */
+
+
+   }
+
+   @media only screen and (min-width: 0px) and (max-width: 479px) {
+		/*	.banner, .bannercontainer		{	width:320px;height:164px;	}
+
+			#video_link  ,#video_frame		{	width:360px;height:201px;	}*/
+.fullwidthbanner-container 	{ 	max-height:552px !important;}
+.fullwidthbanner-container .fullwidthabnner	{max-height:552px !important;}
+
+   }
+
+
+
+
+
+
+
+.fb_iframe_widget iframe{
+	z-index: 120;
+}

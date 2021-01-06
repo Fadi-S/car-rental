@@ -5,7 +5,9 @@ namespace App\Providers;
 use App\Models\Car\Car;
 use App\Models\CarCategory\CarCategory;
 use App\Models\CarEdition\CarEdition;
+use App\Models\CarField\CarField;
 use App\Models\CarOctane\CarOctane;
+use App\Models\CarSection\CarSection;
 use App\Models\CarType\CarType;
 use App\Models\Client\Client;
 use App\Models\ClientArea\ClientArea;
@@ -27,6 +29,9 @@ class NavigationServiceProvider extends ServiceProvider
         $this->adminRolesFormViewComposer();
         $this->adminClientsFormViewComposer();
         $this->adminCarShowViewComposer();
+        $this->userMostViewedViewComposer();
+        $this->userSellCarFormViewComposer();
+        $this->userSearchCarViewComposer();
     }
 
     public function adminUrlComposer()
@@ -56,9 +61,9 @@ class NavigationServiceProvider extends ServiceProvider
                 'types' => array_merge(["0" => "-"], CarType::pluck("name", "id")->toArray()),
                 'editions' => array_merge(["0" => "-"], CarEdition::pluck("name", "id")->toArray()),
                 'octanes' => array_merge(["0" => "-"], CarOctane::pluck("name", "id")->toArray()),
-                'fields' => array_diff(\Schema::getColumnListing("cars"), Car::$excluded, ["id"]) ,
                 'clients' => array_merge(["0" => "-"], Client::pluck("name", "id")->toArray()),
                 'statuses' => array_merge(["0" => "-"], Status::pluck("name", "id")->toArray()),
+                'sections' => CarSection::all()
             ]);
         });
     }
@@ -67,7 +72,7 @@ class NavigationServiceProvider extends ServiceProvider
     {
         view()->composer("admin.cars.show", function($view) {
             $view->with([
-                'fields' => array_diff(\Schema::getColumnListing("cars"), Car::$excluded, ["id"]) ,
+                'sections' => CarSection::all()
             ]);
         });
     }
@@ -98,6 +103,42 @@ class NavigationServiceProvider extends ServiceProvider
             $view->with([
                 'areas' => array_merge(["0" => "-"], ClientArea::pluck("name", "id")->toArray()),
                 'locations' => array_merge(["0" => "-"], Location::pluck("name", "id")->toArray()),
+            ]);
+        });
+    }
+
+    public function userMostViewedViewComposer()
+    {
+        view()->composer("user.cars.mostViewed", function($view) {
+            $view->with([
+                'cars' => Car::where([["views", ">", 0], ["status_id", Status::where("name", "Approved")->first()->id]])->orderBy('views', 'desc')->take(3)->get()
+            ]);
+        });
+    }
+
+    public function userSellCarFormViewComposer()
+    {
+        view()->composer("user.cars.sell", function($view) {
+            $view->with([
+                'categories' => array_merge(["0" => "-"], CarCategory::pluck("name", "id")->toArray()),
+                'locations' => array_merge(["0" => "-"], Location::pluck("name", "id")->toArray()),
+                'types' => array_merge(["0" => "-"], CarType::pluck("name", "id")->toArray()),
+                'editions' => array_merge(["0" => "-"], CarEdition::pluck("name", "id")->toArray()),
+                'octanes' => array_merge(["0" => "-"], CarOctane::pluck("name", "id")->toArray()),
+                'sections' => CarSection::all()
+            ]);
+        });
+    }
+
+    public function userSearchCarViewComposer()
+    {
+        view()->composer("user.cars.search", function($view) {
+            $view->with([
+                'categories' => array_merge(["0" => "-"], CarCategory::pluck("name", "id")->toArray()),
+                'locations' => array_merge(["0" => "-"], Location::pluck("name", "id")->toArray()),
+                'types' => array_merge(["0" => "-"], CarType::pluck("name", "id")->toArray()),
+                'editions' => array_merge(["0" => "-"], CarEdition::pluck("name", "id")->toArray()),
+                'octanes' => array_merge(["0" => "-"], CarOctane::pluck("name", "id")->toArray()),
             ]);
         });
     }

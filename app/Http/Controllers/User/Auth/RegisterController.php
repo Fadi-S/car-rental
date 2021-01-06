@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User\Auth;
 
+use App\Http\Helpers\Slug;
 use App\Models\Client\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -27,17 +28,22 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:clients',
             'password' => 'required|string|min:6|confirmed',
+            'terms' => 'accepted'
         ]);
     }
 
     protected function create(array $data)
     {
+        $data['username'] = Slug::createSlug(Client::class, ".", $data["name"], "username");
+        $data["serial"] = Client::max("serial") + 1;
         return Client::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => $data['password'],
+            'username' => $data["username"],
+            'serial' => $data["serial"]
         ]);
     }
 }

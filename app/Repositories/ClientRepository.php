@@ -13,6 +13,8 @@ class ClientRepository
 
     public function create(CreateClientRequest $request)
     {
+        $request->request->set("serial", Client::max("serial") + 1);
+
         $client = Client::create($request->all());
 
         if (!is_null($client)) {

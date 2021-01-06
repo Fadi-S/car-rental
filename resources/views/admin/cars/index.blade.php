@@ -17,9 +17,11 @@
         <table class="table data-table">
             <thead>
             <tr>
+                <th>Serial</th>
                 <th>Cover Image</th>
                 <th>Title</th>
                 <th>Seller</th>
+                <th>Creator</th>
                 <th>Category</th>
                 <th>Edition</th>
                 <th>Type</th>
@@ -35,15 +37,17 @@
             <tbody>
             @foreach($cars as $car)
                 <tr>
+                    <td>#{{ $car->serial }}</td>
                     <td><img src="{{ $car->cover }}" width="70" height="70"></td>
                     <td>{{ $car->title }}</td>
-                    <td>{{ $car->client->name }}</td>
-                    <td>{{ $car->category->name }}</td>
-                    <td>{{ $car->edition->name }}</td>
-                    <td>{{ $car->type->name }}</td>
-                    <td>{{ $car->octane->name }}</td>
-                    <td>{{ $car->location->name }}</td>
-                    <td>{{ $car->price }} <strong>L.E.</strong></td>
+                    <td><a href="{{ url("$adminUrl/clients/" . $car->client->username) }}">{{ $car->client->name }}</a></td>
+                    <td>@if($car->creator)<a href="{{ url("$adminUrl/admins/" . $car->creator->username) }}">{{ $car->creator->name }}</a>@endif</td>
+                    <td>{{ $car->getField("category_id")->name }}</td>
+                    <td>{{ $car->getField("edition_id")->name }}</td>
+                    <td>{{ $car->getField("type_id")->name }}</td>
+                    <td>{{ $car->getField("octane_id")->name }}</td>
+                    <td>{{ $car->getField("location_id")->name }}</td>
+                    <td>{{ $car->getField("price") }} <strong>L.E.</strong></td>
                     <td><span style="font-weight:bold; color:{{ $car->status->color }}">{{ $car->status->name }}</span></td>
                     <td><a href="{{ url("$adminUrl/cars/$car->id/") }}" class="btn btn-primary">View</a></td>
                     <td><a href="{{ url("$adminUrl/cars/$car->id/edit") }}" class="btn btn-info">Edit</a></td>

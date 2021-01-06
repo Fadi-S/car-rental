@@ -2,10 +2,13 @@
 
 namespace App\Models\Car;
 
+use App\Models\Admin\Admin;
 use App\Models\AdminLog\AdminLog;
 use App\Models\CarCategory\CarCategory;
 use App\Models\CarEdition\CarEdition;
+use App\Models\CarField\CarField;
 use App\Models\CarOctane\CarOctane;
+use App\Models\CarRequest\CarRequest;
 use App\Models\CarType\CarType;
 use App\Models\Client\Client;
 use App\Models\CarImage\CarImage;
@@ -19,6 +22,11 @@ trait CarRelationships
     public function adminLog()
     {
         return $this->morphMany(AdminLog::class, 'logable');
+    }
+
+    public function fields()
+    {
+        return $this->belongsToMany(CarField::class, "car_field", "car_id", "field_id")->withPivot('value');
     }
 
     public function category()
@@ -59,6 +67,16 @@ trait CarRelationships
     public function images()
     {
         return $this->hasMany(CarImage::class);
+    }
+
+    public function requests()
+    {
+        return $this->hasMany(CarRequest::class);
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(Admin::class, "admin_id");
     }
 
 }

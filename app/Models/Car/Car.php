@@ -10,18 +10,14 @@ class Car extends Model
     use SoftDeletes, CarRelationships, CarAttributes, CarMethods;
 
     public static $excluded =
-        [
-            "created_at", "updated_at", "deleted_at", "archived_at", "location_id",
-            "category_id", "type_id", "octane_id", "edition_id", "price", "client_id",
-            "sold_at", "cover", "status_id"
-        ];
+        ["location_id", "category_id", "type_id", "octane_id", "edition_id", "price", "client_id", "youtube"];
+
+    protected $with = ["fields"];
 
     protected $table = "cars";
-    protected $guarded = [];
+    protected $fillable = ["serial", "client_id", "status_id", "cover"];
     protected $dates = [
-        "deleted_at",
-        "archived_at",
-        "sold_at"
+        "deleted_at"
     ];
 
 }

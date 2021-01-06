@@ -17,6 +17,7 @@
         <table class="table data-table">
             <thead>
             <tr>
+                <th>Serial</th>
                 <th>Picture</th>
                 <th>Name</th>
                 <th>Email</th>
@@ -32,6 +33,7 @@
             <tbody>
             @foreach($clients as $client)
                 <tr>
+                    <td>#{{ $client->serial }}</td>
                     <td><img src="{{ $client->picture }}" class="thumb-md img-circle"></td>
                     <td>{{ $client->name }}</td>
                     <td>{{ $client->email }}</td>

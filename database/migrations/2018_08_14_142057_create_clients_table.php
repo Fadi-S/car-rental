@@ -15,6 +15,7 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer("serial")->unique();
             $table->string("email")->unique();
             $table->string("name");
             $table->string("username")->unique();
@@ -24,7 +25,6 @@ class CreateClientsTable extends Migration
             $table->text("picture")->nullable();
             $table->integer("location_id")->nullable();
             $table->integer("area_id")->nullable();
-            $table->timestamp("archived_at")->nullable();
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

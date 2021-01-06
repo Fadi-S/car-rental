@@ -26,7 +26,7 @@
         <!-- LOGO -->
         <div class="topbar-left">
             <div class="text-center">
-                <a href="{{ url($adminUrl) }}" class="logo"><i class="icon-magnet icon-c-logo"></i><span>Car Rental</span></a>
+                <a href="{{ url($adminUrl) }}" class="logo"><i class="icon-magnet icon-c-logo"></i><span>Ahmed Zaki Cars</span></a>
             </div>
         </div>
 
@@ -80,17 +80,20 @@
             <!--- Divider -->
             <div id="sidebar-menu">
 
-                <div class="row">
-                    <img class="img-circle" src="{{ $currentAdmin->picture }}" width="70" height="70">
-                    <span class="a">{{ $currentAdmin->name }}</span>
-                </div>
-
                 <ul>
+                    <li class="row">
+                        <img class="img-circle" src="{{ $currentAdmin->picture }}" width="70" height="70">
+                        <span class="a">{{ $currentAdmin->name }}</span>
+                    </li>
 
                     <li class="text-muted menu-title">Navigation</li>
 
                     <li>
                         <a href="{{ url($adminUrl) }}" class="waves-effect"><i class="ti-home"></i> <span> Dashboard </span></a>
+                    </li>
+
+                    <li>
+                        <a href="{{ url("$adminUrl/messages") }}" class="waves-effect"><i class="ti-email"></i> <span> Contact Us </span></a>
                     </li>
 
                     @if($currentAdmin->hasPermissionGroup("Clients"))
@@ -179,7 +182,7 @@
                             <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-map-marker"></i> <span> Locations </span> <span class="menu-arrow"></span> </a>
                             <ul class="list-unstyled">
                                 @if($currentAdmin->can("add_admin") || $currentAdmin->can("add_car") || $currentAdmin->can("add_client"))
-                                    <li><a href="{{ url("$adminUrl/locations/create") }}">Create Locations</a></li>
+                                    <li><a href="{{ url("$adminUrl/locations/create") }}">Create Location</a></li>
                                 @endif
 
                                 @if($currentAdmin->can("view_admin") || $currentAdmin->can("view_car") || $currentAdmin->can("view_calint"))
@@ -235,7 +238,6 @@
 </script>
 
 {!! Html::script("js/admin/app.js") !!}
-@yield("plugins.js")
 
 <script type="text/javascript">
     jQuery(document).ready(function($) {

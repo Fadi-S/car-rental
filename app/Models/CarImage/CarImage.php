@@ -19,7 +19,7 @@ class CarImage extends Model
 
     public function getPathAttribute($image)
     {
-    	return \Storage::url('public/photos/cars/'.$image);
+    	return url(\Storage::url('public/photos/cars/' . $image));
     }
 
 }

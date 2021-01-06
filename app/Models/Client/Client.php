@@ -13,8 +13,9 @@ class Client extends Authenticatable
     protected $guarded = [];
     protected $dates = [
         "deleted_at",
-        "archived_at"
     ];
+
+    protected $table = 'clients';
 
     public function getRouteKeyName()
     {

@@ -121,7 +121,7 @@
 
                                 <tr>
                                     <td class="content-block" valign="top">
-                                        Car Rental - Admin Dashboard
+                                        Ahmed Zaki Cars - Admin Dashboard
                                     </td>
                                 </tr>
 

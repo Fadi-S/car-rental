@@ -4,6 +4,7 @@ namespace App\Models\Admin;
 
 
 use App\Models\AdminLog\AdminLog;
+use App\Models\Car\Car;
 use App\Models\Location\Location;
 use App\Models\Role\Role;
 
@@ -23,6 +24,11 @@ trait AdminRelationships
     public function location()
     {
         return $this->belongsTo(Location::class, 'location_id');
+    }
+
+    public function cars()
+    {
+        return $this->hasMany(Car::class);
     }
 
 }

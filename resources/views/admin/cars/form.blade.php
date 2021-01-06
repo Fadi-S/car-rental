@@ -1,4 +1,8 @@
-
+@if($errors->count())
+    <div class="row card-box">
+        @include("errorList")
+    </div>
+@endif
 <div class="row card-box">
 
         <div class="form-group col-md-6">
@@ -26,15 +30,14 @@
 </div>
 
 <div class="row card-box">
-
- <div class="row form-group">
+    <div class="row form-group">
             <div class="col-md-12">
                 {!! Form::label("image" , 'Upload Multiple images') !!}
                 <input type="file" name="files[]" multiple accept="image/*">
             </div>
-        </div>
+    </div>
 
-        @if(!$car->images->isEmpty())
+    @if(!$car->images->isEmpty())
 
         <div class="row form-group">
             <div class="col-md-12">
@@ -61,41 +64,42 @@
 
        </div> 
 
-       @endif
+    @endif
 
 </div>
 
 <div class="row card-box">
 
+    <h3>Car Details</h3>
     <div class="row">
         <div class="form-group col-md-6">
-            {!! Form::label("category_id", "Car Category *") !!}
-            {!! Form::select("category_id", $categories, null, ["class" => "form-control"]) !!}
+            {!! Form::label("fields[category_id]", "Car Category *") !!}
+            {!! Form::select("fields[category_id]", $categories, (!$create) ? $car->getField("category_id")->id : null, ["class" => "form-control"]) !!}
         </div>
 
         <div class="form-group col-md-6">
-            {!! Form::label("type_id", "Car Type *") !!}
-            {!! Form::select("type_id", $types, null, ["class" => "form-control"]) !!}
+            {!! Form::label("fields[type_id]", "Car Type *") !!}
+            {!! Form::select("fields[type_id]", $types, (!$create) ? $car->getField("type_id")->id : null, ["class" => "form-control"]) !!}
         </div>
 
         <div class="form-group col-md-6">
-            {!! Form::label("edition_id", "Car Edition *") !!}
-            {!! Form::select("edition_id", $editions, null, ["class" => "form-control"]) !!}
+            {!! Form::label("fields[edition_id]", "Car Edition *") !!}
+            {!! Form::select("fields[edition_id]", $editions, (!$create) ? $car->getField("edition_id")->id : null, ["class" => "form-control"]) !!}
         </div>
 
         <div class="form-group col-md-6">
-            {!! Form::label("octane_id", "Car Octane *") !!}
-            {!! Form::select("octane_id", $octanes, null, ["class" => "form-control"]) !!}
+            {!! Form::label("fields[octane_id]", "Car Octane *") !!}
+            {!! Form::select("fields[octane_id]", $octanes, (!$create) ? $car->getField("octane_id")->id : null, ["class" => "form-control"]) !!}
         </div>
 
         <div class="form-group col-md-6">
-            {!! Form::label("location_id", "Car Location *") !!}
-            {!! Form::select("location_id", $locations, null, ["class" => "form-control"]) !!}
+            {!! Form::label("fields[location_id]", "Car Location *") !!}
+            {!! Form::select("fields[location_id]", $locations, (!$create) ? $car->getField("location_id")->id : null, ["class" => "form-control"]) !!}
         </div>
 
         <div class="form-group col-md-6">
-            {!! Form::label("price", "Car Price *") !!}
-            {!! Form::number("price", null, ["class" => "form-control", "placeholder" => "Price", "min"=>"1"]) !!}
+            {!! Form::label("fields[price]", "Car Price *") !!}
+            {!! Form::number("fields[price]", (!$create) ? $car->getField("price") : null, ["class" => "form-control", "placeholder" => "Price", "min"=>"1"]) !!}
         </div>
 
         <div class="form-group col-md-6">
@@ -108,25 +112,40 @@
             {!! Form::select("status_id", $statuses, null, ["class" => "form-control"]) !!}
         </div>
 
-           
+        <div class="form-group col-md-6">
+            {!! Form::label("fields[youtube]", "Youtube") !!}
+            {!! Form::text("fields[youtube]", (!$create) ? $car->getField("youtube") : null, ["class" => "form-control", "placeholder" => "Youtube"]) !!}
+        </div>
+    </div>
+    <center>{!! Form::submit($submit, ["class"=>"btn btn-success"]) !!}</center>
+</div>
 
+<div class="row card-box">
     <div class="col-md-12">
-        @foreach($fields as $field)
-            <div class="row">
-                <div class="form-group col-md-2">
-                    <div class="peer">
-                        <div class="checkbox checkbox-rectangle checkbox-info peers ai-c">
-                            {!! Form::checkbox($field."__checkbox", 1, (($create) ? false : ($car[$field] != "") ), ['class'=>'peer', "id"=>$field]) !!}
-                            {!! Form::label($field, ucfirst(str_replace("_", " ", $field)), ['class'=>'peers peer-greed js-sb ai-c']) !!}
-                        </div>
-                    </div>
-                </div>
+        @foreach($sections as $section)
+            @if($section->fields()->exists())
+                <h3>{{ $section->name }}</h3>
+                @foreach($section->fields as $field)
+                    @unless(in_array($field->name, \App\Models\Car\Car::$excluded))
+                        <div class="row">
+                            <div class="form-group col-md-2">
+                                <div class="peer">
+                                    <div class="checkbox checkbox-rectangle checkbox-info peers ai-c">
+                                        {!! Form::checkbox($field->id."__checkbox", 1, (($create) ? false : ($car[$field->id] != "") ), ['class'=>'peer', "id"=>$field->id]) !!}
+                                        {!! Form::label($field->id, ucfirst(str_replace("_", " ", $field->name)), ['class'=>'peers peer-greed js-sb ai-c']) !!}
+                                    </div>
+                                </div>
+                            </div>
 
-                <div class="form-group col-md-6">
-                    {!! Form::text($field, null,
-                    ["class" => "form-control", "id" => $field."__input", "placeholder" => ucfirst(str_replace("_", " ", $field)), (($create) ? "disabled" : ($car[$field] == "") ? "disabled" : "" )]) !!}
-                </div>
-            </div>
+                            <div class="form-group col-md-6">
+                                {!! Form::text("fields[$field->name]", (!$create) ? $car->getField($field->name) : null,
+                                ["class" => "form-control", "id" => $field->id."__input", "placeholder" => ucfirst(str_replace("_", " ", $field->name)), (($create) ? "disabled" : ($car[$field->id] == "") ? "disabled" : "" )]) !!}
+                            </div>
+                        </div>
+                    @endunless
+                @endforeach
+            @endif
+            <br>
         @endforeach
 
             <script>
@@ -135,8 +154,4 @@
                 });
             </script>
     </div>
-
-    <center>{!! Form::submit($submit, ["class"=>"btn btn-success"]) !!}</center>
-
-    @include("errorList")
 </div>

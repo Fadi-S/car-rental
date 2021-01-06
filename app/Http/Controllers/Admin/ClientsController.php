@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\ClientRequest\CreateClientRequest;
 use App\Http\Requests\ClientRequest\EditClientRequest;
 use App\Models\Client\Client;
+use App\Models\Status\Status;
 use App\Repositories\ClientRepository;
 use App\Http\Controllers\Controller;
 
@@ -43,8 +44,11 @@ class ClientsController extends Controller
 
     public function show(Client $client)
     {
+        $requests = $client->requests()->whereHas("car", function($query) {
+            $query->where("status_id", Status::where("name", "Approved")->first()->id);
+        })->paginate(100);
         $cars = $this->clientRepo->getAllCars($client);
-        return view("admin.clients.show", compact("client", "cars"));
+        return view("admin.clients.show", compact("client", "cars", "requests"));
     }
 
     public function edit(Client $client)

@@ -113,7 +113,7 @@
 
                                 <tr>
                                     <td class="content-block" valign="top">
-                                        Car Rental
+                                        Ahmed Zaki Cars
                                     </td>
                                 </tr>
 

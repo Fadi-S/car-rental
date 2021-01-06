@@ -16,17 +16,17 @@ class EditCarRequest extends FormRequest
     {
         return [
 
-            "category_id" => "required|numeric|notIn:0",
+            "fields.category_id" => "required|numeric|notIn:0",
 
-            "edition_id" => "required|numeric|notIn:0",
+            "fields.edition_id" => "required|numeric|notIn:0",
 
-            "type_id" => "required|numeric|notIn:0",
+            "fields.type_id" => "required|numeric|notIn:0",
 
-            "octane_id" => "required|numeric|notIn:0",
+            "fields.octane_id" => "required|numeric|notIn:0",
 
-            "location_id" => "required|numeric|notIn:0",
+            "fields.location_id" => "required|numeric|notIn:0",
 
-            "price" => "required|numeric",
+            "fields.price" => "required|numeric",
 
             "client_id" => "required|numeric|notIn:0",
 

@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
         $this->call(CarOctaneTableSeeder::class);
         $this->call(StatusTableSeeder::class);
 
+        $this->call(CarSectionsTableSeeder::class);
+        $this->call(CarFieldsSeeder::class);
+
         $this->call(ClientAreasTableSeeder::class);
     }
 }

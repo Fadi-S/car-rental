@@ -18,4 +18,10 @@ class ForgotPasswordController extends Controller
     {
         return view('user.auth.passwords.email');
     }
+
+    protected function sendResetLinkResponse($response)
+    {
+        flash()->success("Email Sent!");
+        return back()->with('status', trans($response));
+    }
 }

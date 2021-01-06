@@ -23,9 +23,9 @@
                 <th>Phone</th>
                 <th>Active</th>
                 <th>View</th>
-                @if(auth()->guard("admin")->user()->hasPermission("edit_admin"))
+                @can("edit_admin")
                     <th>Edit</th>
-                @endif
+                @endcan
             </tr>
             </thead>
 
